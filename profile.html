@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -11,13 +12,16 @@
 
     <title>Teacher Profile | GCSE Hub</title>
 
+
     <style>
 
         * {
             box-sizing: border-box;
         }
 
+
         body {
+
             margin: 0;
 
             min-height: 100vh;
@@ -30,35 +34,37 @@
             background: #f5f7fb;
 
             color: #172033;
+
         }
 
 
-        /* TOP BRAND BAR */
-
         .top-bar {
+
             height: 7px;
 
             background: #630914;
+
         }
 
 
-        /* PAGE */
-
         .page {
+
             max-width: 760px;
 
             margin: 55px auto;
 
             padding: 0 20px;
+
         }
 
 
-        /* CARD */
-
         .card {
+
             background: white;
 
-            border: 1px solid #e3e7ef;
+            border:
+                1px solid
+                #e3e7ef;
 
             border-radius: 22px;
 
@@ -66,14 +72,20 @@
 
             box-shadow:
                 0 15px 45px
-                rgba(23, 32, 51, 0.09);
+                rgba(
+                    23,
+                    32,
+                    51,
+                    0.09
+                );
+
         }
 
 
-        /* LOGO */
-
         .logo {
+
             width: 60px;
+
             height: 60px;
 
             border-radius: 16px;
@@ -85,6 +97,7 @@
             display: flex;
 
             align-items: center;
+
             justify-content: center;
 
             font-size: 23px;
@@ -92,12 +105,12 @@
             font-weight: 800;
 
             margin-bottom: 24px;
+
         }
 
 
-        /* HEADINGS */
-
         .step {
+
             color: #630914;
 
             font-size: 12px;
@@ -109,54 +122,65 @@
             letter-spacing: 0.08em;
 
             margin-bottom: 8px;
+
         }
 
 
         h1 {
-            margin: 0 0 8px;
+
+            margin:
+                0 0 8px;
 
             font-size: 30px;
+
         }
 
 
         h1 span {
+
             color: #630914;
+
         }
 
 
         .intro {
+
             color: #6d7688;
 
             line-height: 1.55;
 
             margin:
-                0
-                0
-                32px;
+                0 0 32px;
+
         }
 
 
-        /* FIELDS */
-
         .field {
+
             margin-bottom: 22px;
+
         }
 
 
         label {
+
             display: block;
 
             font-weight: 700;
 
             margin-bottom: 8px;
+
         }
 
 
         input,
         select {
+
             width: 100%;
 
-            padding: 14px 15px;
+            padding:
+                14px
+                15px;
 
             border:
                 1px solid
@@ -173,217 +197,388 @@
             color: #172033;
 
             outline: none;
+
         }
 
 
         input:focus,
         select:focus {
-            border-color: #630914;
+
+            border-color:
+                #630914;
 
             box-shadow:
                 0 0 0 3px
-                rgba(99, 9, 20, 0.1);
+                rgba(
+                    99,
+                    9,
+                    20,
+                    0.1
+                );
+
         }
 
 
         .hint {
+
             margin-top: 7px;
 
             font-size: 12px;
 
             color: #858d9d;
+
         }
 
 
-        /* SUBJECTS */
+        .assigned-id {
+
+            padding:
+                17px;
+
+            border:
+                1px solid
+                #ead1d5;
+
+            background:
+                #fff7f8;
+
+            border-radius:
+                12px;
+
+        }
+
+
+        .assigned-id strong {
+
+            display: block;
+
+            color:
+                #630914;
+
+            font-size:
+                23px;
+
+            letter-spacing:
+                0.05em;
+
+            margin-bottom:
+                4px;
+
+        }
+
+
+        .pending-id {
+
+            color:
+                #6d7688;
+
+            font-size:
+                14px;
+
+            font-weight:
+                600;
+
+            line-height:
+                1.45;
+
+        }
+
 
         .subjects {
+
             display: grid;
 
             grid-template-columns:
-                repeat(2, 1fr);
+                repeat(
+                    2,
+                    1fr
+                );
 
             gap: 10px;
+
         }
 
 
         .subject-option {
+
             border:
                 1px solid
                 #dfe3ea;
 
-            border-radius: 11px;
+            border-radius:
+                11px;
 
-            padding: 12px;
+            padding:
+                12px;
 
-            background: #fafbfe;
+            background:
+                #fafbfe;
 
-            cursor: pointer;
+            cursor:
+                pointer;
 
-            font-size: 14px;
+            font-size:
+                14px;
 
-            font-weight: 600;
+            font-weight:
+                600;
 
             transition:
-                border-color 0.15s ease,
-                background 0.15s ease;
+                border-color
+                0.15s ease,
+                background
+                0.15s ease;
+
         }
 
 
         .subject-option:hover {
-            border-color: #630914;
+
+            border-color:
+                #630914;
+
         }
 
 
         .subject-option input {
-            width: auto;
 
-            margin-right: 7px;
+            width:
+                auto;
+
+            margin-right:
+                7px;
+
         }
 
 
-        .subject-option:has(input:checked) {
-            border-color: #630914;
+        .subject-option:has(
+            input:checked
+        ) {
 
-            background: #fff5f6;
+            border-color:
+                #630914;
+
+            background:
+                #fff5f6;
+
         }
 
-
-        /* BUTTONS */
 
         .buttons {
-            display: flex;
 
-            justify-content: space-between;
+            display:
+                flex;
 
-            align-items: center;
+            justify-content:
+                space-between;
 
-            gap: 12px;
+            align-items:
+                center;
 
-            margin-top: 32px;
+            gap:
+                12px;
+
+            margin-top:
+                32px;
+
+        }
+
+
+        button {
+
+            font-family:
+                inherit;
+
         }
 
 
         .sign-out {
+
             border:
                 1px solid
                 #d9dde7;
 
-            background: white;
+            background:
+                white;
 
-            color: #172033;
+            color:
+                #172033;
 
-            padding: 13px 17px;
+            padding:
+                13px
+                17px;
 
-            border-radius: 10px;
+            border-radius:
+                10px;
 
-            font-weight: 700;
+            font-weight:
+                700;
 
-            cursor: pointer;
+            cursor:
+                pointer;
+
         }
 
 
         .continue {
-            border: none;
 
-            background: #630914;
+            border:
+                none;
 
-            color: white;
+            background:
+                #630914;
+
+            color:
+                white;
 
             padding:
                 14px
                 21px;
 
-            border-radius: 10px;
+            border-radius:
+                10px;
 
-            font-size: 15px;
+            font-size:
+                15px;
 
-            font-weight: 700;
+            font-weight:
+                700;
 
-            cursor: pointer;
+            cursor:
+                pointer;
 
             transition:
-                transform 0.15s ease,
-                opacity 0.15s ease;
+                transform
+                0.15s ease,
+                opacity
+                0.15s ease;
+
         }
 
 
         .continue:hover {
-            opacity: 0.92;
+
+            opacity:
+                0.92;
 
             transform:
                 translateY(-1px);
+
         }
 
 
-        /* STATUS */
+        .continue:disabled {
+
+            opacity:
+                0.65;
+
+            cursor:
+                wait;
+
+            transform:
+                none;
+
+        }
+
 
         .status {
-            display: none;
 
-            margin-top: 18px;
+            display:
+                none;
 
-            padding: 12px 14px;
+            margin-top:
+                18px;
 
-            border-radius: 10px;
+            padding:
+                12px
+                14px;
 
-            text-align: center;
+            border-radius:
+                10px;
 
-            font-size: 14px;
+            text-align:
+                center;
+
+            font-size:
+                14px;
+
         }
 
 
         .status.error {
-            display: block;
 
-            background: #fff0f1;
+            display:
+                block;
 
-            color: #a51d2d;
+            background:
+                #fff0f1;
+
+            color:
+                #a51d2d;
+
         }
 
 
         .status.success {
-            display: block;
 
-            background: #eaf7ef;
+            display:
+                block;
 
-            color: #18743c;
+            background:
+                #eaf7ef;
+
+            color:
+                #18743c;
+
         }
 
 
-        /* MOBILE */
-
-        @media (max-width: 560px) {
+        @media (
+            max-width: 560px
+        ) {
 
             .page {
+
                 margin:
-                    25px
-                    auto;
+                    25px auto;
+
             }
 
 
             .card {
+
                 padding:
                     28px
                     21px;
+
             }
 
 
             .subjects {
-                grid-template-columns: 1fr;
+
+                grid-template-columns:
+                    1fr;
+
             }
 
 
             .buttons {
-                flex-direction: column-reverse;
 
-                align-items: stretch;
+                flex-direction:
+                    column-reverse;
+
+                align-items:
+                    stretch;
+
             }
 
 
             .sign-out,
             .continue {
-                width: 100%;
+
+                width:
+                    100%;
+
             }
 
         }
@@ -401,6 +596,7 @@
 
     <main class="page">
 
+
         <section class="card">
 
 
@@ -415,16 +611,19 @@
 
 
             <h1>
+
                 Tell us about
                 <span>you</span>
+
             </h1>
 
 
             <p class="intro">
 
-                Set up your teacher profile so
-                GCSE Hub knows who you are and
-                which subjects you teach.
+                Set up your teacher profile
+                so GCSE Hub knows who you
+                are and which subjects you
+                teach.
 
             </p>
 
@@ -449,31 +648,49 @@
                     >
 
                     <div class="hint">
-                        Use the name students and staff
-                        know you by.
+
+                        Use the name students
+                        and staff know you by.
+
                     </div>
 
                 </div>
 
 
-                <!-- TEACHER ID -->
+                <!-- AUTOMATIC ID -->
 
                 <div class="field">
 
-                    <label for="teacherId">
-                        Teacher ID
+                    <label>
+                        Your Teacher ID
                     </label>
 
-                    <input
-                        type="text"
-                        id="teacherId"
-                        placeholder="e.g. TCH-001"
-                        required
+
+                    <div
+                        class="assigned-id"
+                        id="assignedIdBox"
                     >
 
+                        <span
+                            class="pending-id"
+                        >
+
+                            Your unique Teacher ID
+                            will be assigned
+                            automatically when
+                            you create your profile.
+
+                        </span>
+
+                    </div>
+
+
                     <div class="hint">
-                        Your Teacher ID should match
-                        your GCSE Hub teacher record.
+
+                        You don't choose your ID.
+                        GCSE Hub assigns IDs
+                        consecutively.
+
                     </div>
 
                 </div>
@@ -486,6 +703,7 @@
                     <label for="role">
                         Role
                     </label>
+
 
                     <select
                         id="role"
@@ -644,7 +862,7 @@
                                 value="ethics"
                             >
 
-                            Ethics & Philosophy
+                            Ethics &amp; Philosophy
 
                         </label>
 
@@ -722,8 +940,9 @@
                     <button
                         type="submit"
                         class="continue"
+                        id="continueButton"
                     >
-                        Continue to Teacher Portal →
+                        Create Teacher Profile →
                     </button>
 
                 </div>
@@ -734,10 +953,15 @@
 
         </section>
 
+
     </main>
 
 
     <script>
+
+
+        const API_URL =
+            "https://script.google.com/macros/s/AKfycbwAlZiQbF-nEkYkZCTWwsp1lltQDG9OacGdnGzGtixBga0f0cyue0LYyDqePqZzNiYF/exec";
 
 
         const SESSION_KEY =
@@ -747,8 +971,6 @@
         const PROFILE_KEY =
             "GCSE_TEACHER_PROFILE";
 
-
-        /* Make sure the teacher is logged in */
 
         const session =
             sessionStorage.getItem(
@@ -777,6 +999,18 @@
             );
 
 
+        const continueButton =
+            document.getElementById(
+                "continueButton"
+            );
+
+
+        const assignedIdBox =
+            document.getElementById(
+                "assignedIdBox"
+            );
+
+
         const savedProfile =
             JSON.parse(
                 localStorage.getItem(
@@ -785,9 +1019,16 @@
             );
 
 
-        /* Restore previous profile */
+        /*
+         * If this browser already has a
+         * server-assigned teacher profile,
+         * don't create another teacher.
+         */
 
-        if (savedProfile) {
+        if (
+            savedProfile &&
+            savedProfile.teacherId
+        ) {
 
             document.getElementById(
                 "teacherName"
@@ -796,15 +1037,21 @@
 
 
             document.getElementById(
-                "teacherId"
-            ).value =
-                savedProfile.teacherId || "";
-
-
-            document.getElementById(
                 "role"
             ).value =
                 savedProfile.role || "";
+
+
+            assignedIdBox.innerHTML =
+
+                "<strong>" +
+                savedProfile.teacherId +
+                "</strong>" +
+
+                "<span class=\"hint\">" +
+                "Already assigned to this " +
+                "teacher profile." +
+                "</span>";
 
 
             (
@@ -830,16 +1077,35 @@
                 }
             );
 
+
+            continueButton.textContent =
+                "Continue to Teacher Portal →";
+
         }
 
 
-        /* SAVE PROFILE */
-
         form.addEventListener(
             "submit",
-            function(event) {
+            async function(event) {
 
                 event.preventDefault();
+
+
+                const name =
+                    document
+                        .getElementById(
+                            "teacherName"
+                        )
+                        .value
+                        .trim();
+
+
+                const role =
+                    document
+                        .getElementById(
+                            "role"
+                        )
+                        .value;
 
 
                 const subjects = [
@@ -850,9 +1116,37 @@
 
                 ].map(
                     function(input) {
+
                         return input.value;
+
                     }
                 );
+
+
+                if (!name) {
+
+                    status.textContent =
+                        "Please enter your name.";
+
+                    status.className =
+                        "status error";
+
+                    return;
+
+                }
+
+
+                if (!role) {
+
+                    status.textContent =
+                        "Please choose your role.";
+
+                    status.className =
+                        "status error";
+
+                    return;
+
+                }
 
 
                 if (
@@ -870,86 +1164,238 @@
                 }
 
 
-                const profile = {
+                /*
+                 * Existing profile:
+                 * simply continue.
+                 */
 
-                    name:
-                        document
-                            .getElementById(
-                                "teacherName"
-                            )
-                            .value
-                            .trim(),
+                if (
+                    savedProfile &&
+                    savedProfile.teacherId
+                ) {
 
-                    teacherId:
-                        document
-                            .getElementById(
-                                "teacherId"
-                            )
-                            .value
-                            .trim(),
+                    const updatedProfile = {
 
-                    role:
-                        document
-                            .getElementById(
-                                "role"
-                            )
-                            .value,
+                        ...savedProfile,
 
-                    subjects:
-                        subjects
+                        name: name,
 
-                };
+                        role: role,
+
+                        subjects: subjects
+
+                    };
 
 
-                localStorage.setItem(
-                    PROFILE_KEY,
-                    JSON.stringify(
-                        profile
-                    )
-                );
+                    localStorage.setItem(
+
+                        PROFILE_KEY,
+
+                        JSON.stringify(
+                            updatedProfile
+                        )
+
+                    );
 
 
-                status.textContent =
-                    "Profile saved. Opening your teacher portal…";
+                    window.location.replace(
+                        "dashboard.html"
+                    );
+
+                    return;
+
+                }
+
+
+                continueButton.disabled =
+                    true;
+
+
+                continueButton.textContent =
+                    "Assigning your Teacher ID…";
+
 
                 status.className =
-                    "status success";
+                    "status";
 
 
-                setTimeout(
-                    function() {
+                try {
 
-                        window.location.replace(
-                            "dashboard.html"
+
+                    const response =
+                        await fetch(
+                            API_URL,
+                            {
+
+                                method:
+                                    "POST",
+
+                                headers:
+                                    {
+                                        "Content-Type":
+                                            "text/plain;charset=utf-8"
+                                    },
+
+                                body:
+                                    JSON.stringify({
+
+                                        action:
+                                            "createTeacher",
+
+                                        token:
+                                            session,
+
+                                        name:
+                                            name,
+
+                                        role:
+                                            role,
+
+                                        subjects:
+                                            subjects.join(
+                                                ", "
+                                            )
+
+                                    })
+
+                            }
                         );
 
-                    },
-                    600
-                );
+
+                    const result =
+                        await response.json();
+
+
+                    if (
+                        !result.success
+                    ) {
+
+                        throw new Error(
+                            result.error ||
+                            "Unable to create teacher profile."
+                        );
+
+                    }
+
+
+                    const profile = {
+
+                        name:
+                            name,
+
+                        teacherId:
+                            result.teacherId,
+
+                        role:
+                            role,
+
+                        subjects:
+                            subjects,
+
+                        school:
+                            result.school ||
+                            "Paulet High School",
+
+                        serverAssigned:
+                            true
+
+                    };
+
+
+                    localStorage.setItem(
+
+                        PROFILE_KEY,
+
+                        JSON.stringify(
+                            profile
+                        )
+
+                    );
+
+
+                    assignedIdBox.innerHTML =
+
+                        "<strong>" +
+                        result.teacherId +
+                        "</strong>" +
+
+                        "<span class=\"hint\">" +
+                        "Your Teacher ID has been assigned successfully." +
+                        "</span>";
+
+
+                    status.textContent =
+
+                        "Profile created. Your Teacher ID is " +
+                        result.teacherId +
+                        ". Opening your teacher portal…";
+
+
+                    status.className =
+                        "status success";
+
+
+                    setTimeout(
+                        function() {
+
+                            window.location.replace(
+                                "dashboard.html"
+                            );
+
+                        },
+                        900
+                    );
+
+
+                } catch (error) {
+
+
+                    status.textContent =
+
+                        error.message ||
+                        "Something went wrong. Please try again.";
+
+
+                    status.className =
+                        "status error";
+
+
+                    continueButton.disabled =
+                        false;
+
+
+                    continueButton.textContent =
+                        "Create Teacher Profile →";
+
+                }
 
             }
         );
 
 
-        /* SIGN OUT */
-
         document
-            .getElementById("signOut")
+            .getElementById(
+                "signOut"
+            )
             .addEventListener(
                 "click",
                 function() {
+
 
                     sessionStorage.removeItem(
                         SESSION_KEY
                     );
 
+
                     sessionStorage.removeItem(
                         "GCSE_TEACHER_SCHOOL"
                     );
 
+
                     localStorage.removeItem(
                         PROFILE_KEY
                     );
+
 
                     window.location.replace(
                         "login.html"
@@ -957,6 +1403,7 @@
 
                 }
             );
+
 
     </script>
 
