@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>School Login | GCSE Hub for Teachers</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 24px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 460px;
+
+            background: white;
+            border: 1px solid #e4e7ef;
+            border-radius: 22px;
+
+            padding: 42px;
+
+            box-shadow:
+                0 15px 45px rgba(23, 32, 51, 0.12);
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+
+            margin: 0 auto 20px;
+
+            border-radius: 18px;
+
+            background: #630914;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 30px;
+            font-weight: 800;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 0;
+            font-size: 28px;
+        }
+
+        h1 span {
+            color: #630914;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6d7688;
+            margin: 10px 0 32px;
+            line-height: 1.5;
+        }
+
+        label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 14px 15px;
+
+            border: 1px solid #d9dde7;
+            border-radius: 12px;
+
+            font-size: 16px;
+            font-family: inherit;
+
+            background: white;
+            color: #172033;
+
+            outline: none;
+        }
+
+        select:focus,
+        input:focus {
+            border-color: #630914;
+            box-shadow: 0 0 0 3px rgba(99, 9, 20, 0.1);
+        }
+
+        .field {
+            margin-bottom: 22px;
+        }
+
+        .login-button {
+            width: 100%;
+
+            border: none;
+            border-radius: 12px;
+
+            padding: 15px;
+
+            background: #630914;
+            color: white;
+
+            font-size: 16px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.15s ease,
+                opacity 0.15s ease;
+        }
+
+        .login-button:hover {
+            opacity: 0.92;
+            transform: translateY(-1px);
+        }
+
+        .login-button:disabled {
+            opacity: 0.6;
+            cursor: wait;
+            transform: none;
+        }
+
+        .status {
+            margin-top: 18px;
+            padding: 12px 14px;
+
+            border-radius: 10px;
+
+            text-align: center;
+            font-size: 14px;
+
+            display: none;
+        }
+
+        .status.error {
+            display: block;
+            background: #fff0f1;
+            color: #a51d2d;
+        }
+
+        .status.success {
+            display: block;
+            background: #eaf7ef;
+            color: #18743c;
+        }
+
+        .footer {
+            margin-top: 28px;
+
+            text-align: center;
+
+            color: #8a92a3;
+            font-size: 12px;
+        }
+
+        @media (max-width: 520px) {
+            .login-card {
+                padding: 30px 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="login-card">
+
+        <div class="logo">
+            GH
+        </div>
+
+        <h1>
+            GCSE <span>Hub</span>
+        </h1>
+
+        <p class="subtitle">
+            Teacher Portal
+            <br>
+            Paulet High School
+        </p>
+
+        <form id="loginForm">
+
+            <div class="field">
+
+                <label for="school">
+                    School
+                </label>
+
+                <select id="school" required>
+
+                    <option value="Paulet High School">
+                        Paulet High School
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="field">
+
+                <label for="password">
+                    School Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter school password"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+            <button
+                type="submit"
+                class="login-button"
+                id="loginButton"
+            >
+                Sign in →
+            </button>
+
+        </form>
+
+        <div
+            id="status"
+            class="status"
+        ></div>
+
+        <div class="footer">
+            GCSE Hub for Teachers
+        </div>
+
+    </main>
+
+
+    <script>
+
+        /*
+         * SAME Google Apps Script used by GCSE Hub.
+         *
+         * The school password is NEVER stored here.
+         */
+
+        const GCSE_HUB_API_URL =
+            "https://script.google.com/macros/s/AKfycbwAlZiQbF-nEkYkZCTWwsp1lltQDG9OacGdnGzGtixBga0f0cyue0LYyDqePqZzNiYF/exec";
+
+
+        const SESSION_KEY =
+            "GCSE_TEACHER_SESSION";
+
+
+        const SCHOOL_KEY =
+            "GCSE_TEACHER_SCHOOL";
+
+
+        const form =
+            document.getElementById("loginForm");
+
+
+        const passwordInput =
+            document.getElementById("password");
+
+
+        const loginButton =
+            document.getElementById("loginButton");
+
+
+        const status =
+            document.getElementById("status");
+
+
+        function showStatus(
+            message,
+            type
+        ) {
+
+            status.textContent =
+                message;
+
+            status.className =
+                "status " + type;
+
+        }
+
+
+        form.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+                const school =
+                    document.getElementById(
+                        "school"
+                    ).value;
+
+                const password =
+                    passwordInput.value;
+
+
+                loginButton.disabled =
+                    true;
+
+                loginButton.textContent =
+                    "Signing in…";
+
+                status.className =
+                    "status";
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            GCSE_HUB_API_URL,
+                            {
+
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "text/plain;charset=utf-8"
+                                },
+
+                                body:
+                                    JSON.stringify({
+
+                                        action:
+                                            "login",
+
+                                        school:
+                                            school,
+
+                                        password:
+                                            password
+
+                                    })
+
+                            }
+                        );
+
+
+                    const result =
+                        await response.json();
+
+
+                    if (
+                        !result.success ||
+                        !result.token
+                    ) {
+
+                        showStatus(
+                            result.error ||
+                            "Login failed.",
+                            "error"
+                        );
+
+                        return;
+
+                    }
+
+
+                    /*
+                     * Store the temporary
+                     * server-generated session.
+                     */
+
+                    sessionStorage.setItem(
+                        SESSION_KEY,
+                        result.token
+                    );
+
+
+                    sessionStorage.setItem(
+                        SCHOOL_KEY,
+                        result.school
+                    );
+
+
+                    showStatus(
+                        "School verified. Opening teacher portal…",
+                        "success"
+                    );
+
+
+                    /*
+                     * Temporary destination.
+                     *
+                     * We will create the teacher
+                     * dashboard next.
+                     */
+
+                    setTimeout(
+                        function() {
+
+                            window.location.replace(
+                                "dashboard.html"
+                            );
+
+                        },
+                        500
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        error
+                    );
+
+                    showStatus(
+                        "Unable to contact the GCSE Hub authentication server.",
+                        "error"
+                    );
+
+                } finally {
+
+                    loginButton.disabled =
+                        false;
+
+                    loginButton.textContent =
+                        "Sign in →";
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>
