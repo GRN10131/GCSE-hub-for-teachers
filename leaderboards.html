@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Leaderboards | GCSE Hub for Teachers</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background: #f4f6f9;
+            color: #18202f;
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 250px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #570914 0%,
+                    #720c1b 100%
+                );
+
+            color: white;
+            padding: 25px 18px;
+
+            display: flex;
+            flex-direction: column;
+
+            z-index: 1000;
+        }
+
+        .brand {
+            padding: 5px 12px 28px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.15);
+        }
+
+        .brand-title {
+            font-size: 21px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .brand-subtitle {
+            margin-top: 5px;
+            font-size: 12px;
+
+            color:
+                rgba(255,255,255,0.68);
+
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .navigation {
+            margin-top: 25px;
+        }
+
+        .nav-title {
+            font-size: 10px;
+
+            text-transform: uppercase;
+            letter-spacing: 1.4px;
+
+            color:
+                rgba(255,255,255,0.5);
+
+            padding:
+                0 12px 10px;
+        }
+
+        .nav-item {
+            display: block;
+
+            width: 100%;
+
+            border: none;
+            background: transparent;
+
+            color:
+                rgba(255,255,255,0.8);
+
+            text-align: left;
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            margin-bottom: 5px;
+
+            font-size: 14px;
+
+            cursor: pointer;
+
+            text-decoration: none;
+
+            transition:
+                background 0.2s,
+                color 0.2s;
+        }
+
+        .nav-item:hover {
+            background:
+                rgba(255,255,255,0.09);
+
+            color: white;
+        }
+
+        .nav-item.active {
+            background:
+                rgba(255,255,255,0.14);
+
+            color: white;
+
+            font-weight: 600;
+        }
+
+        .nav-icon {
+            display: inline-block;
+            width: 25px;
+            opacity: 0.9;
+        }
+
+        .sidebar-bottom {
+            margin-top: auto;
+        }
+
+        .teacher-mini {
+            padding: 13px;
+            border-radius: 9px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            margin-bottom: 10px;
+        }
+
+        .teacher-mini-name {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .teacher-mini-id {
+            margin-top: 3px;
+
+            font-size: 11px;
+
+            color:
+                rgba(255,255,255,0.6);
+        }
+
+        .logout-button {
+            width: 100%;
+
+            border: none;
+
+            background:
+                rgba(0,0,0,0.15);
+
+            color:
+                rgba(255,255,255,0.8);
+
+            padding: 11px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-size: 13px;
+        }
+
+        .logout-button:hover {
+            background:
+                rgba(0,0,0,0.28);
+
+            color: white;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+            margin-left: 250px;
+
+            min-height: 100vh;
+
+            padding: 30px 35px;
+        }
+
+        .topbar {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 25px;
+        }
+
+        .page-heading h1 {
+            margin: 0;
+
+            font-size: 27px;
+
+            letter-spacing: -0.6px;
+        }
+
+        .page-heading p {
+            margin: 6px 0 0;
+
+            color: #6d7584;
+
+            font-size: 14px;
+        }
+
+        .school-badge {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            background: white;
+
+            border:
+                1px solid #e1e5eb;
+
+            padding: 9px 13px;
+
+            border-radius: 9px;
+
+            font-size: 12px;
+
+            color: #596171;
+        }
+
+        .school-dot {
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: #630914;
+        }
+
+        /* =========================
+           LEADERBOARD SELECTOR
+        ========================= */
+
+        .leaderboard-switcher {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 15px;
+
+            margin-bottom: 22px;
+        }
+
+        .leaderboard-option {
+            background: white;
+
+            border:
+                1px solid #e0e4ea;
+
+            border-radius: 12px;
+
+            padding: 20px;
+
+            cursor: pointer;
+
+            text-align: left;
+
+            transition:
+                border 0.2s,
+                box-shadow 0.2s,
+                transform 0.2s;
+        }
+
+        .leaderboard-option:hover {
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 5px 15px
+                rgba(0,0,0,0.05);
+        }
+
+        .leaderboard-option.active {
+            border-color:
+                #630914;
+
+            box-shadow:
+                0 0 0 1px #630914;
+        }
+
+        .option-icon {
+            font-size: 23px;
+            margin-bottom: 9px;
+        }
+
+        .option-title {
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .option-description {
+            margin-top: 5px;
+
+            color: #858d99;
+
+            font-size: 11px;
+
+            line-height: 1.45;
+        }
+
+        /* =========================
+           FILTER BAR
+        ========================= */
+
+        .filter-panel {
+            background: white;
+
+            border:
+                1px solid #e1e5eb;
+
+            border-radius: 11px;
+
+            padding: 18px 20px;
+
+            margin-bottom: 22px;
+        }
+
+        .filter-title {
+            font-size: 12px;
+
+            font-weight: 650;
+
+            margin-bottom: 13px;
+        }
+
+        .filters {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 12px;
+        }
+
+        .filter-group label {
+            display: block;
+
+            font-size: 10px;
+
+            color: #7c8491;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.6px;
+
+            margin-bottom: 5px;
+        }
+
+        .filter-group select {
+            width: 100%;
+
+            padding: 9px 10px;
+
+            border:
+                1px solid #dfe3e8;
+
+            border-radius: 7px;
+
+            background: #fafbfc;
+
+            color: #333b49;
+
+            font-size: 12px;
+
+            outline: none;
+        }
+
+        .filter-group select:focus {
+            border-color: #630914;
+        }
+
+        /* =========================
+           LEADERBOARD PANEL
+        ========================= */
+
+        .leaderboard-panel {
+            background: white;
+
+            border:
+                1px solid #e1e5eb;
+
+            border-radius: 11px;
+
+            overflow: hidden;
+        }
+
+        .leaderboard-header {
+            padding: 20px;
+
+            border-bottom:
+                1px solid #edf0f3;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+        .leaderboard-header h2 {
+            margin: 0;
+
+            font-size: 16px;
+        }
+
+        .leaderboard-header p {
+            margin: 5px 0 0;
+
+            color: #89919e;
+
+            font-size: 11px;
+        }
+
+        .live-status {
+            display: flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            font-size: 10px;
+
+            color: #7e8794;
+        }
+
+        .live-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #4d8a57;
+        }
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 650px;
+        }
+
+        th {
+            padding:
+                12px 20px;
+
+            text-align: left;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.7px;
+
+            color: #858d99;
+
+            background: #fafbfc;
+
+            border-bottom:
+                1px solid #e7eaf0;
+        }
+
+        td {
+            padding:
+                14px 20px;
+
+            font-size: 12px;
+
+            border-bottom:
+                1px solid #eef0f3;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: #fafbfc;
+        }
+
+        .rank {
+            width: 65px;
+
+            font-weight: 700;
+
+            color: #6e7582;
+        }
+
+        .rank.top {
+            font-size: 17px;
+        }
+
+        .student-name {
+            font-weight: 650;
+        }
+
+        .student-secondary {
+            margin-top: 3px;
+
+            color: #9299a5;
+
+            font-size: 10px;
+        }
+
+        .xp {
+            font-weight: 700;
+
+            color: #630914;
+        }
+
+        .level {
+            font-weight: 600;
+        }
+
+        .streak {
+            color: #555e6d;
+        }
+
+        .subject-count {
+            color: #687181;
+        }
+
+        /* =========================
+           EMPTY / LOADING STATE
+        ========================= */
+
+        .loading {
+            padding: 50px 20px;
+
+            text-align: center;
+
+            color: #858d99;
+
+            font-size: 12px;
+        }
+
+        .loading-spinner {
+            width: 25px;
+            height: 25px;
+
+            border:
+                3px solid #e6e8ec;
+
+            border-top-color:
+                #630914;
+
+            border-radius: 50%;
+
+            animation:
+                spin 0.8s linear infinite;
+
+            margin:
+                0 auto 12px;
+        }
+
+        @keyframes spin {
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+        /* =========================
+           INFO
+        ========================= */
+
+        .information {
+            margin-top: 20px;
+
+            padding: 15px 18px;
+
+            background: #f8f9fb;
+
+            border:
+                1px solid #e5e8ed;
+
+            border-radius: 9px;
+
+            color: #727b88;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            .sidebar {
+                position: static;
+
+                width: 100%;
+
+                min-height: auto;
+
+                padding: 15px;
+            }
+
+            .navigation {
+                display: flex;
+
+                overflow-x: auto;
+
+                margin-top: 15px;
+            }
+
+            .nav-title {
+                display: none;
+            }
+
+            .nav-item {
+                white-space: nowrap;
+
+                width: auto;
+
+                margin-right: 5px;
+            }
+
+            .sidebar-bottom {
+                display: none;
+            }
+
+            .main {
+                margin-left: 0;
+
+                padding: 22px 16px;
+            }
+
+            .topbar {
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 12px;
+            }
+
+            .filters {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 550px) {
+
+            .leaderboard-switcher {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         SIDEBAR
+    ========================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-title">
+                GCSE Hub
+            </div>
+
+            <div class="brand-subtitle">
+                Teacher Portal
+            </div>
+
+        </div>
+
+
+        <nav class="navigation">
+
+            <div class="nav-title">
+                Portal
+            </div>
+
+
+            <a
+                class="nav-item"
+                href="dashboard.html"
+            >
+                <span class="nav-icon">▦</span>
+                Dashboard
+            </a>
+
+
+            <a
+                class="nav-item active"
+                href="leaderboards.html"
+            >
+                <span class="nav-icon">♛</span>
+                Leaderboards
+            </a>
+
+
+            <a
+                class="nav-item"
+                href="teacher-help.html"
+            >
+                <span class="nav-icon">?</span>
+                Teacher Help
+            </a>
+
+
+            <a
+                class="nav-item"
+                href="profile.html"
+            >
+                <span class="nav-icon">○</span>
+                My Profile
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="teacher-mini">
+
+                <div
+                    class="teacher-mini-name"
+                    id="sidebarTeacherName"
+                >
+                    Teacher
+                </div>
+
+                <div
+                    class="teacher-mini-id"
+                    id="sidebarTeacherId"
+                >
+                    TCH-000
+                </div>
+
+            </div>
+
+
+            <button
+                class="logout-button"
+                onclick="logout()"
+            >
+                Sign out
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="main">
+
+
+        <div class="topbar">
+
+            <div class="page-heading">
+
+                <h1>
+                    Leaderboards
+                </h1>
+
+                <p>
+                    Monitor student engagement and GCSE Hub progress.
+                </p>
+
+            </div>
+
+
+            <div class="school-badge">
+
+                <span class="school-dot"></span>
+
+                <span id="schoolName">
+                    Paulet High School
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             LEADERBOARD TYPE
+        ========================= -->
+
+        <section class="leaderboard-switcher">
+
+
+            <div
+                class="leaderboard-option active"
+                id="agentOption"
+                onclick="selectLeaderboard('agents')"
+            >
+
+                <div class="option-icon">
+                    🕵️
+                </div>
+
+                <div class="option-title">
+                    Agent Leaderboard
+                </div>
+
+                <div class="option-description">
+                    Compare student agents by XP,
+                    level and activity.
+                </div>
+
+            </div>
+
+
+            <div
+                class="leaderboard-option"
+                id="overallOption"
+                onclick="selectLeaderboard('overall')"
+            >
+
+                <div class="option-icon">
+                    ⭐
+                </div>
+
+                <div class="option-title">
+                    Overall XP Leaderboard
+                </div>
+
+                <div class="option-description">
+                    Rank students by their total
+                    GCSE Hub progression.
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =========================
+             FILTERS
+        ========================= -->
+
+        <section class="filter-panel">
+
+            <div class="filter-title">
+                Leaderboard Filters
+            </div>
+
+
+            <div class="filters">
+
+
+                <div class="filter-group">
+
+                    <label for="yearFilter">
+                        Year
+                    </label>
+
+                    <select id="yearFilter">
+
+                        <option value="all">
+                            All Years
+                        </option>
+
+                        <option value="10">
+                            Year 10
+                        </option>
+
+                        <option value="11">
+                            Year 11
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="filter-group">
+
+                    <label for="subjectFilter">
+                        Subject
+                    </label>
+
+                    <select id="subjectFilter">
+
+                        <option value="all">
+                            All Subjects
+                        </option>
+
+                        <option value="maths">
+                            Maths
+                        </option>
+
+                        <option value="english">
+                            English
+                        </option>
+
+                        <option value="biology">
+                            Biology
+                        </option>
+
+                        <option value="chemistry">
+                            Chemistry
+                        </option>
+
+                        <option value="physics">
+                            Physics
+                        </option>
+
+                        <option value="history">
+                            History
+                        </option>
+
+                        <option value="geography">
+                            Geography
+                        </option>
+
+                        <option value="spanish">
+                            Spanish
+                        </option>
+
+                        <option value="french">
+                            French
+                        </option>
+
+                        <option value="engineering">
+                            Engineering
+                        </option>
+
+                        <option value="business">
+                            Business
+                        </option>
+
+                        <option value="creative-imedia">
+                            Creative i-Media
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="filter-group">
+
+                    <label for="periodFilter">
+                        Period
+                    </label>
+
+                    <select id="periodFilter">
+
+                        <option value="all">
+                            All Time
+                        </option>
+
+                        <option value="year">
+                            This Academic Year
+                        </option>
+
+                        <option value="term">
+                            This Term
+                        </option>
+
+                        <option value="month">
+                            This Month
+                        </option>
+
+                        <option value="week">
+                            This Week
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             LEADERBOARD
+        ========================= -->
+
+        <section class="leaderboard-panel">
+
+
+            <div class="leaderboard-header">
+
+                <div>
+
+                    <h2 id="leaderboardTitle">
+                        Agent Leaderboard
+                    </h2>
+
+                    <p id="leaderboardDescription">
+                        Highest-performing student agents.
+                    </p>
+
+                </div>
+
+
+                <div class="live-status">
+
+                    <span class="live-dot"></span>
+
+                    Live data
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="table-wrapper"
+                id="leaderboardContent"
+            >
+
+                <div class="loading">
+
+                    <div class="loading-spinner"></div>
+
+                    Loading leaderboard...
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =========================
+             INFORMATION
+        ========================= -->
+
+        <div class="information">
+
+            <strong>About the leaderboards:</strong>
+
+            Leaderboards are intended to help teachers
+            monitor engagement and celebrate progress.
+            They do not determine student grades and should
+            be used alongside normal classroom assessment.
+
+        </div>
+
+
+    </main>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        const SESSION_KEY =
+            "GCSE_TEACHER_SESSION";
+
+        const SCHOOL_KEY =
+            "GCSE_TEACHER_SCHOOL";
+
+        const PROFILE_KEY =
+            "GCSE_TEACHER_PROFILE";
+
+
+        let currentLeaderboard =
+            "agents";
+
+
+        /*
+         * Check teacher session
+         */
+
+        function checkSession() {
+
+            const session =
+                sessionStorage.getItem(
+                    SESSION_KEY
+                );
+
+            if (!session) {
+
+                window.location.replace(
+                    "login.html"
+                );
+
+                return false;
+
+            }
+
+            return true;
+
+        }
+
+
+        /*
+         * Load teacher details
+         */
+
+        function loadTeacherDetails() {
+
+            const profileData =
+                localStorage.getItem(
+                    PROFILE_KEY
+                );
+
+            const school =
+                sessionStorage.getItem(
+                    SCHOOL_KEY
+                ) ||
+                "Paulet High School";
+
+
+            document.getElementById(
+                "schoolName"
+            ).textContent = school;
+
+
+            if (!profileData) {
+                return;
+            }
+
+
+            try {
+
+                const profile =
+                    JSON.parse(
+                        profileData
+                    );
+
+
+                document.getElementById(
+                    "sidebarTeacherName"
+                ).textContent =
+                    profile.name ||
+                    "Teacher";
+
+
+                document.getElementById(
+                    "sidebarTeacherId"
+                ).textContent =
+                    profile.teacherId ||
+                    "TCH-000";
+
+            } catch (error) {
+
+                console.error(
+                    "Unable to load teacher profile.",
+                    error
+                );
+
+            }
+
+        }
+
+
+        /*
+         * Change leaderboard
+         */
+
+        function selectLeaderboard(type) {
+
+            currentLeaderboard =
+                type;
+
+
+            const agentOption =
+                document.getElementById(
+                    "agentOption"
+                );
+
+            const overallOption =
+                document.getElementById(
+                    "overallOption"
+                );
+
+
+            if (type === "agents") {
+
+                agentOption.classList.add(
+                    "active"
+                );
+
+                overallOption.classList.remove(
+                    "active"
+                );
+
+
+                document.getElementById(
+                    "leaderboardTitle"
+                ).textContent =
+                    "Agent Leaderboard";
+
+
+                document.getElementById(
+                    "leaderboardDescription"
+                ).textContent =
+                    "Highest-performing student agents.";
+
+            } else {
+
+                overallOption.classList.add(
+                    "active"
+                );
+
+                agentOption.classList.remove(
+                    "active"
+                );
+
+
+                document.getElementById(
+                    "leaderboardTitle"
+                ).textContent =
+                    "Overall XP Leaderboard";
+
+
+                document.getElementById(
+                    "leaderboardDescription"
+                ).textContent =
+                    "Students ranked by total GCSE Hub XP.";
+
+            }
+
+
+            loadLeaderboard();
+
+        }
+
+
+        /*
+         * Temporary leaderboard renderer
+         *
+         * This will be replaced by live data
+         * from Google Apps Script.
+         */
+
+        function loadLeaderboard() {
+
+            const container =
+                document.getElementById(
+                    "leaderboardContent"
+                );
+
+
+            container.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    Loading leaderboard data...
+                </div>
+            `;
+
+
+            /*
+             * Backend connection will be added
+             * once the leaderboard endpoint is created.
+             *
+             * For now we show an informative state
+             * rather than fake student information.
+             */
+
+            setTimeout(function() {
+
+                container.innerHTML = `
+                    <div class="loading">
+
+                        <div style="
+                            font-size: 28px;
+                            margin-bottom: 10px;
+                        ">
+                            🏆
+                        </div>
+
+                        <strong style="
+                            display:block;
+                            color:#4b5360;
+                            margin-bottom:5px;
+                        ">
+                            Leaderboard ready
+                        </strong>
+
+                        <span>
+                            Live student leaderboard data
+                            will appear here once the
+                            GCSE Hub data connection is enabled.
+                        </span>
+
+                    </div>
+                `;
+
+            }, 500);
+
+        }
+
+
+        /*
+         * Logout
+         */
+
+        function logout() {
+
+            const confirmed =
+                confirm(
+                    "Are you sure you want to sign out?"
+                );
+
+
+            if (!confirmed) {
+                return;
+            }
+
+
+            sessionStorage.removeItem(
+                SESSION_KEY
+            );
+
+            sessionStorage.removeItem(
+                SCHOOL_KEY
+            );
+
+
+            window.location.replace(
+                "login.html"
+            );
+
+        }
+
+
+        /*
+         * Start page
+         */
+
+        if (checkSession()) {
+
+            loadTeacherDetails();
+
+            loadLeaderboard();
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
