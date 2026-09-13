@@ -1,1 +1,1839 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Teacher Dashboard | GCSE Hub</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background: #f4f6f9;
+            color: #18202f;
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+
+            position: fixed;
+
+            left: 0;
+            top: 0;
+            bottom: 0;
+
+            width: 250px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #570914 0%,
+                    #720c1b 100%
+                );
+
+            color: white;
+
+            padding: 25px 18px;
+
+            display: flex;
+            flex-direction: column;
+
+            z-index: 1000;
+        }
+
+        .brand {
+
+            padding: 5px 12px 28px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.15);
+        }
+
+        .brand-title {
+
+            font-size: 21px;
+            font-weight: 700;
+
+            letter-spacing: -0.3px;
+        }
+
+        .brand-subtitle {
+
+            margin-top: 5px;
+
+            font-size: 12px;
+
+            color:
+                rgba(255,255,255,0.68);
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+        }
+
+        .navigation {
+
+            margin-top: 25px;
+        }
+
+        .nav-title {
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.4px;
+
+            color:
+                rgba(255,255,255,0.5);
+
+            padding:
+                0 12px 10px;
+        }
+
+        .nav-item {
+
+            width: 100%;
+
+            border: none;
+
+            background: transparent;
+
+            color:
+                rgba(255,255,255,0.8);
+
+            text-align: left;
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            margin-bottom: 5px;
+
+            font-size: 14px;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s,
+                color 0.2s;
+        }
+
+        .nav-item:hover {
+
+            background:
+                rgba(255,255,255,0.09);
+
+            color: white;
+        }
+
+        .nav-item.active {
+
+            background:
+                rgba(255,255,255,0.14);
+
+            color: white;
+
+            font-weight: 600;
+        }
+
+        .nav-icon {
+
+            display: inline-block;
+
+            width: 25px;
+
+            opacity: 0.9;
+        }
+
+        .sidebar-bottom {
+
+            margin-top: auto;
+        }
+
+        .teacher-mini {
+
+            padding: 13px;
+
+            border-radius: 9px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            margin-bottom: 10px;
+        }
+
+        .teacher-mini-name {
+
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .teacher-mini-id {
+
+            margin-top: 3px;
+
+            font-size: 11px;
+
+            color:
+                rgba(255,255,255,0.6);
+        }
+
+        .logout-button {
+
+            width: 100%;
+
+            border: none;
+
+            background:
+                rgba(0,0,0,0.15);
+
+            color:
+                rgba(255,255,255,0.8);
+
+            padding: 11px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-size: 13px;
+        }
+
+        .logout-button:hover {
+
+            background:
+                rgba(0,0,0,0.28);
+
+            color: white;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+
+            margin-left: 250px;
+
+            min-height: 100vh;
+
+            padding: 30px 35px;
+        }
+
+        .topbar {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 30px;
+        }
+
+        .page-heading h1 {
+
+            margin: 0;
+
+            font-size: 27px;
+
+            letter-spacing: -0.6px;
+        }
+
+        .page-heading p {
+
+            margin: 6px 0 0;
+
+            color: #6d7584;
+
+            font-size: 14px;
+        }
+
+        .school-badge {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            background: white;
+
+            border: 1px solid #e1e5eb;
+
+            padding: 9px 13px;
+
+            border-radius: 9px;
+
+            font-size: 12px;
+
+            color: #596171;
+        }
+
+        .school-dot {
+
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: #630914;
+        }
+
+        /* =========================
+           WELCOME
+        ========================= */
+
+        .welcome-card {
+
+            background:
+                linear-gradient(
+                    120deg,
+                    #630914,
+                    #861022
+                );
+
+            color: white;
+
+            border-radius: 13px;
+
+            padding: 27px 30px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(70, 7, 17, 0.13);
+        }
+
+        .welcome-text h2 {
+
+            margin: 0;
+
+            font-size: 21px;
+        }
+
+        .welcome-text p {
+
+            margin: 7px 0 0;
+
+            color:
+                rgba(255,255,255,0.75);
+
+            font-size: 13px;
+        }
+
+        .teacher-id-large {
+
+            background:
+                rgba(255,255,255,0.1);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.15);
+
+            padding: 13px 18px;
+
+            border-radius: 9px;
+
+            text-align: right;
+        }
+
+        .teacher-id-label {
+
+            font-size: 9px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.2px;
+
+            color:
+                rgba(255,255,255,0.55);
+        }
+
+        .teacher-id-value {
+
+            margin-top: 4px;
+
+            font-size: 17px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.5px;
+        }
+
+        /* =========================
+           STAT CARDS
+        ========================= */
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 17px;
+
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+
+            background: white;
+
+            border:
+                1px solid #e2e6ec;
+
+            border-radius: 11px;
+
+            padding: 19px;
+
+            min-height: 115px;
+        }
+
+        .stat-label {
+
+            color: #7a8290;
+
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.8px;
+        }
+
+        .stat-value {
+
+            margin-top: 12px;
+
+            font-size: 27px;
+
+            font-weight: 700;
+
+            color: #202838;
+        }
+
+        .stat-description {
+
+            margin-top: 3px;
+
+            font-size: 11px;
+
+            color: #9aa1ad;
+        }
+
+        /* =========================
+           CONTENT GRID
+        ========================= */
+
+        .content-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1.35fr 0.85fr;
+
+            gap: 22px;
+        }
+
+        .panel {
+
+            background: white;
+
+            border:
+                1px solid #e1e5eb;
+
+            border-radius: 11px;
+
+            overflow: hidden;
+        }
+
+        .panel-header {
+
+            padding: 18px 20px;
+
+            border-bottom:
+                1px solid #edf0f3;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+        .panel-title {
+
+            margin: 0;
+
+            font-size: 15px;
+
+            font-weight: 650;
+        }
+
+        .panel-subtitle {
+
+            margin: 4px 0 0;
+
+            font-size: 11px;
+
+            color: #89919e;
+        }
+
+        /* =========================
+           QUICK ACTIONS
+        ========================= */
+
+        .quick-actions {
+
+            padding: 18px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 12px;
+        }
+
+        .action-card {
+
+            border:
+                1px solid #e3e7ec;
+
+            background: #fafbfc;
+
+            padding: 17px;
+
+            border-radius: 9px;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.18s,
+                border 0.18s,
+                background 0.18s;
+        }
+
+        .action-card:hover {
+
+            transform:
+                translateY(-2px);
+
+            border-color:
+                #b9bec7;
+
+            background: white;
+        }
+
+        .action-icon {
+
+            width: 34px;
+            height: 34px;
+
+            border-radius: 8px;
+
+            background: #f1e5e7;
+
+            color: #630914;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 17px;
+
+            margin-bottom: 11px;
+        }
+
+        .action-title {
+
+            font-size: 13px;
+
+            font-weight: 650;
+        }
+
+        .action-description {
+
+            margin-top: 4px;
+
+            color: #858d99;
+
+            font-size: 11px;
+
+            line-height: 1.4;
+        }
+
+        /* =========================
+           PROFILE PANEL
+        ========================= */
+
+        .profile-details {
+
+            padding: 18px 20px;
+        }
+
+        .profile-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 11px 0;
+
+            border-bottom:
+                1px solid #eef0f3;
+
+            font-size: 12px;
+        }
+
+        .profile-row:last-child {
+
+            border-bottom: none;
+        }
+
+        .profile-label {
+
+            color: #858d99;
+        }
+
+        .profile-value {
+
+            text-align: right;
+
+            font-weight: 600;
+
+            color: #333b4a;
+        }
+
+        /* =========================
+           SUBJECTS
+        ========================= */
+
+        .subjects {
+
+            padding: 18px 20px;
+        }
+
+        .subject-tag {
+
+            display: inline-block;
+
+            background: #f3f4f6;
+
+            border:
+                1px solid #e1e4e8;
+
+            color: #454d5b;
+
+            padding: 7px 10px;
+
+            border-radius: 6px;
+
+            font-size: 11px;
+
+            margin:
+                0 5px 7px 0;
+        }
+
+        /* =========================
+           ACTIVITY
+        ========================= */
+
+        .activity {
+
+            padding: 5px 20px 15px;
+        }
+
+        .activity-item {
+
+            display: flex;
+
+            gap: 12px;
+
+            padding: 13px 0;
+
+            border-bottom:
+                1px solid #eef0f3;
+        }
+
+        .activity-item:last-child {
+
+            border-bottom: none;
+        }
+
+        .activity-dot {
+
+            width: 8px;
+            height: 8px;
+
+            margin-top: 5px;
+
+            border-radius: 50%;
+
+            background: #630914;
+
+            flex-shrink: 0;
+        }
+
+        .activity-title {
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+        .activity-time {
+
+            margin-top: 3px;
+
+            font-size: 10px;
+
+            color: #9299a5;
+        }
+
+        /* =========================
+           HELP NOTICE
+        ========================= */
+
+        .help-notice {
+
+            margin-top: 22px;
+
+            background: #fff;
+
+            border:
+                1px solid #e1e5eb;
+
+            border-radius: 11px;
+
+            padding: 18px 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .help-notice h3 {
+
+            margin: 0;
+
+            font-size: 14px;
+        }
+
+        .help-notice p {
+
+            margin: 5px 0 0;
+
+            font-size: 11px;
+
+            color: #818996;
+        }
+
+        .help-button {
+
+            border: none;
+
+            background: #630914;
+
+            color: white;
+
+            padding: 10px 15px;
+
+            border-radius: 7px;
+
+            font-size: 12px;
+
+            cursor: pointer;
+
+            white-space: nowrap;
+        }
+
+        .help-button:hover {
+
+            background: #500710;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 1050px) {
+
+            .stats {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .content-grid {
+
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 750px) {
+
+            .sidebar {
+
+                position: static;
+
+                width: 100%;
+
+                min-height: auto;
+
+                padding: 15px;
+            }
+
+            .navigation {
+
+                display: flex;
+
+                overflow-x: auto;
+
+                margin-top: 15px;
+            }
+
+            .nav-title {
+
+                display: none;
+            }
+
+            .nav-item {
+
+                white-space: nowrap;
+
+                width: auto;
+
+                margin-right: 5px;
+            }
+
+            .sidebar-bottom {
+
+                display: none;
+            }
+
+            .main {
+
+                margin-left: 0;
+
+                padding: 22px 16px;
+            }
+
+            .topbar {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 12px;
+            }
+
+            .welcome-card {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 20px;
+            }
+
+            .teacher-id-large {
+
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .stats {
+
+                grid-template-columns: 1fr;
+            }
+
+            .quick-actions {
+
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- =========================
+         SIDEBAR
+    ========================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-title">
+                GCSE Hub
+            </div>
+
+            <div class="brand-subtitle">
+                Teacher Portal
+            </div>
+
+        </div>
+
+
+        <nav class="navigation">
+
+            <div class="nav-title">
+                Portal
+            </div>
+
+            <button
+                class="nav-item active"
+                onclick="showDashboard()"
+            >
+                <span class="nav-icon">▦</span>
+                Dashboard
+            </button>
+
+            <button
+                class="nav-item"
+                onclick="teacherHelp()"
+            >
+                <span class="nav-icon">?</span>
+                Teacher Help
+            </button>
+
+            <button
+                class="nav-item"
+                onclick="showProfile()"
+            >
+                <span class="nav-icon">○</span>
+                My Profile
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="teacher-mini">
+
+                <div
+                    class="teacher-mini-name"
+                    id="sidebarTeacherName"
+                >
+                    Teacher
+                </div>
+
+                <div
+                    class="teacher-mini-id"
+                    id="sidebarTeacherId"
+                >
+                    TCH-000
+                </div>
+
+            </div>
+
+            <button
+                class="logout-button"
+                onclick="logout()"
+            >
+                Sign out
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="main">
+
+        <div class="topbar">
+
+            <div class="page-heading">
+
+                <h1>
+                    Teacher Dashboard
+                </h1>
+
+                <p>
+                    Welcome to the GCSE Hub staff portal.
+                </p>
+
+            </div>
+
+
+            <div class="school-badge">
+
+                <span class="school-dot"></span>
+
+                <span id="schoolName">
+                    Paulet High School
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             WELCOME CARD
+        ========================= -->
+
+        <section class="welcome-card">
+
+            <div class="welcome-text">
+
+                <h2>
+                    Welcome back,
+                    <span id="teacherName">
+                        Teacher
+                    </span>
+                </h2>
+
+                <p id="teacherRole">
+                    GCSE Hub Staff Member
+                </p>
+
+            </div>
+
+
+            <div class="teacher-id-large">
+
+                <div class="teacher-id-label">
+                    Teacher ID
+                </div>
+
+                <div
+                    class="teacher-id-value"
+                    id="teacherId"
+                >
+                    TCH-000
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             STATISTICS
+        ========================= -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Students Helped
+                </div>
+
+                <div class="stat-value">
+                    0
+                </div>
+
+                <div class="stat-description">
+                    Recorded through Teacher Help
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Help Requests
+                </div>
+
+                <div class="stat-value">
+                    0
+                </div>
+
+                <div class="stat-description">
+                    Requests submitted
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Subjects
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="subjectCount"
+                >
+                    0
+                </div>
+
+                <div class="stat-description">
+                    Subjects assigned to you
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Account
+                </div>
+
+                <div class="stat-value">
+                    Active
+                </div>
+
+                <div class="stat-description">
+                    Teacher account status
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CONTENT
+        ========================= -->
+
+        <div class="content-grid">
+
+
+            <!-- LEFT -->
+
+            <section class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2 class="panel-title">
+                            Quick Actions
+                        </h2>
+
+                        <p class="panel-subtitle">
+                            Common teacher tasks
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="quick-actions">
+
+
+                    <div
+                        class="action-card"
+                        onclick="teacherHelp()"
+                    >
+
+                        <div class="action-icon">
+                            ?
+                        </div>
+
+                        <div class="action-title">
+                            Teacher Help
+                        </div>
+
+                        <div class="action-description">
+                            Review or respond to student
+                            help requests.
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="action-card"
+                        onclick="showProfile()"
+                    >
+
+                        <div class="action-icon">
+                            ○
+                        </div>
+
+                        <div class="action-title">
+                            My Profile
+                        </div>
+
+                        <div class="action-description">
+                            View your teacher information,
+                            role and subjects.
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="action-card"
+                        onclick="comingSoon()"
+                    >
+
+                        <div class="action-icon">
+                            ✓
+                        </div>
+
+                        <div class="action-title">
+                            Marking Centre
+                        </div>
+
+                        <div class="action-description">
+                            Review student answers and
+                            marking requests.
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="action-card"
+                        onclick="comingSoon()"
+                    >
+
+                        <div class="action-icon">
+                            +
+                        </div>
+
+                        <div class="action-title">
+                            Question Bank
+                        </div>
+
+                        <div class="action-description">
+                            Manage revision questions and
+                            model answers.
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- RIGHT -->
+
+            <section class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2 class="panel-title">
+                            My Profile
+                        </h2>
+
+                        <p class="panel-subtitle">
+                            Your staff account
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="profile-details">
+
+                    <div class="profile-row">
+
+                        <span class="profile-label">
+                            Name
+                        </span>
+
+                        <span
+                            class="profile-value"
+                            id="profileName"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-row">
+
+                        <span class="profile-label">
+                            Teacher ID
+                        </span>
+
+                        <span
+                            class="profile-value"
+                            id="profileId"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-row">
+
+                        <span class="profile-label">
+                            Role
+                        </span>
+
+                        <span
+                            class="profile-value"
+                            id="profileRole"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-row">
+
+                        <span class="profile-label">
+                            School
+                        </span>
+
+                        <span
+                            class="profile-value"
+                            id="profileSchool"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+
+        <!-- =========================
+             SUBJECTS
+        ========================= -->
+
+        <section
+            class="panel"
+            style="margin-top:22px;"
+        >
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2 class="panel-title">
+                        My Subjects
+                    </h2>
+
+                    <p class="panel-subtitle">
+                        Subjects assigned to your teacher account
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="subjects"
+                id="subjectsContainer"
+            >
+
+                <span class="subject-tag">
+                    Loading...
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             RECENT ACTIVITY
+        ========================= -->
+
+        <section
+            class="panel"
+            style="margin-top:22px;"
+        >
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2 class="panel-title">
+                        Recent Activity
+                    </h2>
+
+                    <p class="panel-subtitle">
+                        Your recent activity on GCSE Hub
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="activity">
+
+                <div class="activity-item">
+
+                    <div class="activity-dot"></div>
+
+                    <div>
+
+                        <div class="activity-title">
+                            Teacher account created
+                        </div>
+
+                        <div class="activity-time">
+                            Your teacher profile is active.
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="activity-item">
+
+                    <div class="activity-dot"></div>
+
+                    <div>
+
+                        <div class="activity-title">
+                            GCSE Hub Teacher Portal
+                        </div>
+
+                        <div class="activity-time">
+                            You are currently signed in.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             HELP NOTICE
+        ========================= -->
+
+        <section class="help-notice">
+
+            <div>
+
+                <h3>
+                    Need help with a student?
+                </h3>
+
+                <p>
+                    Open Teacher Help to review questions,
+                    answers and marking information.
+                </p>
+
+            </div>
+
+            <button
+                class="help-button"
+                onclick="teacherHelp()"
+            >
+                Open Teacher Help
+            </button>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        /*
+         * GCSE HUB TEACHER DASHBOARD
+         *
+         * Loads the teacher profile created
+         * on profile.html.
+         */
+
+        const PROFILE_KEY =
+            "GCSE_TEACHER_PROFILE";
+
+        const SESSION_KEY =
+            "GCSE_TEACHER_SESSION";
+
+        const SCHOOL_KEY =
+            "GCSE_TEACHER_SCHOOL";
+
+
+        function loadTeacherProfile() {
+
+            const profileData =
+                localStorage.getItem(PROFILE_KEY);
+
+            const session =
+                sessionStorage.getItem(SESSION_KEY);
+
+            /*
+             * If there is no profile or session,
+             * send the teacher back to login.
+             */
+
+            if (!profileData || !session) {
+
+                window.location.replace(
+                    "login.html"
+                );
+
+                return;
+
+            }
+
+
+            let profile;
+
+            try {
+
+                profile =
+                    JSON.parse(profileData);
+
+            } catch (error) {
+
+                console.error(
+                    "Unable to read teacher profile.",
+                    error
+                );
+
+                window.location.replace(
+                    "login.html"
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * Teacher name
+             */
+
+            const name =
+                profile.name ||
+                "Teacher";
+
+
+            document.getElementById(
+                "teacherName"
+            ).textContent = name;
+
+
+            document.getElementById(
+                "profileName"
+            ).textContent = name;
+
+
+            document.getElementById(
+                "sidebarTeacherName"
+            ).textContent = name;
+
+
+            /*
+             * Teacher ID
+             */
+
+            const teacherId =
+                profile.teacherId ||
+                "TCH-000";
+
+
+            document.getElementById(
+                "teacherId"
+            ).textContent = teacherId;
+
+
+            document.getElementById(
+                "profileId"
+            ).textContent = teacherId;
+
+
+            document.getElementById(
+                "sidebarTeacherId"
+            ).textContent = teacherId;
+
+
+            /*
+             * Role
+             */
+
+            const role =
+                profile.role ||
+                "GCSE Hub Staff Member";
+
+
+            document.getElementById(
+                "teacherRole"
+            ).textContent = role;
+
+
+            document.getElementById(
+                "profileRole"
+            ).textContent = role;
+
+
+            /*
+             * School
+             */
+
+            const school =
+                profile.school ||
+                sessionStorage.getItem(
+                    SCHOOL_KEY
+                ) ||
+                "Paulet High School";
+
+
+            document.getElementById(
+                "schoolName"
+            ).textContent = school;
+
+
+            document.getElementById(
+                "profileSchool"
+            ).textContent = school;
+
+
+            /*
+             * Subjects
+             *
+             * The profile currently stores subjects
+             * as a comma-separated string.
+             */
+
+            let subjects = [];
+
+            if (Array.isArray(profile.subjects)) {
+
+                subjects =
+                    profile.subjects;
+
+            } else if (
+                typeof profile.subjects === "string"
+            ) {
+
+                subjects =
+                    profile.subjects
+                        .split(",")
+                        .map(function(subject) {
+                            return subject.trim();
+                        })
+                        .filter(function(subject) {
+                            return subject.length > 0;
+                        });
+
+            }
+
+
+            document.getElementById(
+                "subjectCount"
+            ).textContent =
+                subjects.length;
+
+
+            const container =
+                document.getElementById(
+                    "subjectsContainer"
+                );
+
+
+            container.innerHTML = "";
+
+
+            if (subjects.length === 0) {
+
+                const empty =
+                    document.createElement(
+                        "span"
+                    );
+
+                empty.className =
+                    "subject-tag";
+
+                empty.textContent =
+                    "No subjects assigned";
+
+                container.appendChild(
+                    empty
+                );
+
+            } else {
+
+                subjects.forEach(
+                    function(subject) {
+
+                        const tag =
+                            document.createElement(
+                                "span"
+                            );
+
+                        tag.className =
+                            "subject-tag";
+
+                        tag.textContent =
+                            subject;
+
+                        container.appendChild(
+                            tag
+                        );
+
+                    }
+                );
+
+            }
+
+        }
+
+
+        /*
+         * Navigation
+         */
+
+        function showDashboard() {
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        function teacherHelp() {
+
+            /*
+             * This will become the Teacher Help
+             * page in the next stage.
+             */
+
+            window.location.href =
+                "teacher-help.html";
+
+        }
+
+
+        function showProfile() {
+
+            /*
+             * For now, take the teacher to the
+             * profile page they already use.
+             */
+
+            window.location.href =
+                "profile.html";
+
+        }
+
+
+        function comingSoon() {
+
+            alert(
+                "This GCSE Hub feature is coming soon."
+            );
+
+        }
+
+
+        /*
+         * Logout
+         */
+
+        function logout() {
+
+            const confirmed =
+                confirm(
+                    "Are you sure you want to sign out?"
+                );
+
+
+            if (!confirmed) {
+                return;
+            }
+
+
+            sessionStorage.removeItem(
+                SESSION_KEY
+            );
+
+            sessionStorage.removeItem(
+                SCHOOL_KEY
+            );
+
+
+            window.location.replace(
+                "login.html"
+            );
+
+        }
+
+
+        /*
+         * Start dashboard
+         */
+
+        loadTeacherProfile();
+
+    </script>
+
+</body>
+
+</html>
