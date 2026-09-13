@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Teacher Profile | GCSE Hub</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f5f7fb;
+
+            color: #172033;
+        }
+
+
+        /* TOP BRAND BAR */
+
+        .top-bar {
+            height: 7px;
+
+            background: #630914;
+        }
+
+
+        /* PAGE */
+
+        .page {
+            max-width: 760px;
+
+            margin: 55px auto;
+
+            padding: 0 20px;
+        }
+
+
+        /* CARD */
+
+        .card {
+            background: white;
+
+            border: 1px solid #e3e7ef;
+
+            border-radius: 22px;
+
+            padding: 40px;
+
+            box-shadow:
+                0 15px 45px
+                rgba(23, 32, 51, 0.09);
+        }
+
+
+        /* LOGO */
+
+        .logo {
+            width: 60px;
+            height: 60px;
+
+            border-radius: 16px;
+
+            background: #630914;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 23px;
+
+            font-weight: 800;
+
+            margin-bottom: 24px;
+        }
+
+
+        /* HEADINGS */
+
+        .step {
+            color: #630914;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.08em;
+
+            margin-bottom: 8px;
+        }
+
+
+        h1 {
+            margin: 0 0 8px;
+
+            font-size: 30px;
+        }
+
+
+        h1 span {
+            color: #630914;
+        }
+
+
+        .intro {
+            color: #6d7688;
+
+            line-height: 1.55;
+
+            margin:
+                0
+                0
+                32px;
+        }
+
+
+        /* FIELDS */
+
+        .field {
+            margin-bottom: 22px;
+        }
+
+
+        label {
+            display: block;
+
+            font-weight: 700;
+
+            margin-bottom: 8px;
+        }
+
+
+        input,
+        select {
+            width: 100%;
+
+            padding: 14px 15px;
+
+            border:
+                1px solid
+                #d7dce6;
+
+            border-radius: 11px;
+
+            font-family: inherit;
+
+            font-size: 16px;
+
+            background: white;
+
+            color: #172033;
+
+            outline: none;
+        }
+
+
+        input:focus,
+        select:focus {
+            border-color: #630914;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(99, 9, 20, 0.1);
+        }
+
+
+        .hint {
+            margin-top: 7px;
+
+            font-size: 12px;
+
+            color: #858d9d;
+        }
+
+
+        /* SUBJECTS */
+
+        .subjects {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 10px;
+        }
+
+
+        .subject-option {
+            border:
+                1px solid
+                #dfe3ea;
+
+            border-radius: 11px;
+
+            padding: 12px;
+
+            background: #fafbfe;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition:
+                border-color 0.15s ease,
+                background 0.15s ease;
+        }
+
+
+        .subject-option:hover {
+            border-color: #630914;
+        }
+
+
+        .subject-option input {
+            width: auto;
+
+            margin-right: 7px;
+        }
+
+
+        .subject-option:has(input:checked) {
+            border-color: #630914;
+
+            background: #fff5f6;
+        }
+
+
+        /* BUTTONS */
+
+        .buttons {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-top: 32px;
+        }
+
+
+        .sign-out {
+            border:
+                1px solid
+                #d9dde7;
+
+            background: white;
+
+            color: #172033;
+
+            padding: 13px 17px;
+
+            border-radius: 10px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        .continue {
+            border: none;
+
+            background: #630914;
+
+            color: white;
+
+            padding:
+                14px
+                21px;
+
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.15s ease,
+                opacity 0.15s ease;
+        }
+
+
+        .continue:hover {
+            opacity: 0.92;
+
+            transform:
+                translateY(-1px);
+        }
+
+
+        /* STATUS */
+
+        .status {
+            display: none;
+
+            margin-top: 18px;
+
+            padding: 12px 14px;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            font-size: 14px;
+        }
+
+
+        .status.error {
+            display: block;
+
+            background: #fff0f1;
+
+            color: #a51d2d;
+        }
+
+
+        .status.success {
+            display: block;
+
+            background: #eaf7ef;
+
+            color: #18743c;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 560px) {
+
+            .page {
+                margin:
+                    25px
+                    auto;
+            }
+
+
+            .card {
+                padding:
+                    28px
+                    21px;
+            }
+
+
+            .subjects {
+                grid-template-columns: 1fr;
+            }
+
+
+            .buttons {
+                flex-direction: column-reverse;
+
+                align-items: stretch;
+            }
+
+
+            .sign-out,
+            .continue {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="top-bar"></div>
+
+
+    <main class="page">
+
+        <section class="card">
+
+
+            <div class="logo">
+                GH
+            </div>
+
+
+            <div class="step">
+                Teacher Setup
+            </div>
+
+
+            <h1>
+                Tell us about
+                <span>you</span>
+            </h1>
+
+
+            <p class="intro">
+
+                Set up your teacher profile so
+                GCSE Hub knows who you are and
+                which subjects you teach.
+
+            </p>
+
+
+            <form id="profileForm">
+
+
+                <!-- NAME -->
+
+                <div class="field">
+
+                    <label for="teacherName">
+                        Your name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="teacherName"
+                        placeholder="e.g. Mr Goodall"
+                        autocomplete="name"
+                        required
+                    >
+
+                    <div class="hint">
+                        Use the name students and staff
+                        know you by.
+                    </div>
+
+                </div>
+
+
+                <!-- TEACHER ID -->
+
+                <div class="field">
+
+                    <label for="teacherId">
+                        Teacher ID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="teacherId"
+                        placeholder="e.g. TCH-001"
+                        required
+                    >
+
+                    <div class="hint">
+                        Your Teacher ID should match
+                        your GCSE Hub teacher record.
+                    </div>
+
+                </div>
+
+
+                <!-- ROLE -->
+
+                <div class="field">
+
+                    <label for="role">
+                        Role
+                    </label>
+
+                    <select
+                        id="role"
+                        required
+                    >
+
+                        <option value="">
+                            Choose your role…
+                        </option>
+
+                        <option value="Teacher">
+                            Teacher
+                        </option>
+
+                        <option value="Head of Department">
+                            Head of Department
+                        </option>
+
+                        <option value="Teaching Assistant">
+                            Teaching Assistant
+                        </option>
+
+                        <option value="Senior Leadership">
+                            Senior Leadership
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- SUBJECTS -->
+
+                <div class="field">
+
+                    <label>
+                        Subjects you teach
+                    </label>
+
+
+                    <div class="subjects">
+
+
+                        <label class="subject-option">
+
+                            <input
+                                type="checkbox"
+                                value="biology"
+                            >
+
+                            Biology
+
+                        </label>
+
+
+                        <label class="subject-option">
+
+                            <input
+                                type="checkbox"
+                                value="chemistry"
+                            >
+
+                            Chemistry
+
+                        </label>
+
+
+                        <label class="subject-option">
+
+                            <input
+                                type="checkbox"
+                                value="physics"
+                            >
+
+                            Physics
+
+                        </label>
+
+
+                        <label class="subject-option">
+
+                            <input
+                                type="checkbox"
+                                value="maths"
+                            >
+
+                            Maths
+
+                        </label>
+
+
+                        <label class="subject-option">
+
+                            <input
+                                type="checkbox"
+                                value="english"
+                            >
+
+                            English
+
+                        </label>
+
+
+                        <label class="subject-option">
+
+                            <input
+                                type="checkbox"
+                                value="history"
+                            >
+
+                            History
+
+                        </label>
+
+
+                        <label class="subject-option">
+
+                            <input
+                                type="checkbox"
+                                value="geography"
+                            >
+
+                            Geography
+
+                        </label>
+
+
+                        <label class="subject-option">
+
+                            <input
+                                type="checkbox"
+                                value="spanish"
+                            >
+
+                            Spanish
+
+                        </label>
+
+
+                        <label class="subject-option">
+
+                            <input
+                                type="checkbox"
+                                value="french"
+                            >
+
+                            French
+
+                        </label>
+
+
+                        <label class="subject-option">
+
+                            <input
+                                type="checkbox"
+                                value="ethics"
+                            >
+
+                            Ethics & Philosophy
+
+                        </label>
+
+
+                        <label class="subject-option">
+
+                            <input
+                                type="checkbox"
+                                value="systems"
+                            >
+
+                            Systems Engineering
+
+                        </label>
+
+
+                        <label class="subject-option">
+
+                            <input
+                                type="checkbox"
+                                value="engineering"
+                            >
+
+                            Engineering Design
+
+                        </label>
+
+
+                        <label class="subject-option">
+
+                            <input
+                                type="checkbox"
+                                value="imedia"
+                            >
+
+                            Creative i-Media
+
+                        </label>
+
+
+                        <label class="subject-option">
+
+                            <input
+                                type="checkbox"
+                                value="business"
+                            >
+
+                            Business
+
+                        </label>
+
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="status"
+                    class="status"
+                ></div>
+
+
+                <div class="buttons">
+
+                    <button
+                        type="button"
+                        class="sign-out"
+                        id="signOut"
+                    >
+                        Sign out
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="continue"
+                    >
+                        Continue to Teacher Portal →
+                    </button>
+
+                </div>
+
+
+            </form>
+
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+
+        const SESSION_KEY =
+            "GCSE_TEACHER_SESSION";
+
+
+        const PROFILE_KEY =
+            "GCSE_TEACHER_PROFILE";
+
+
+        /* Make sure the teacher is logged in */
+
+        const session =
+            sessionStorage.getItem(
+                SESSION_KEY
+            );
+
+
+        if (!session) {
+
+            window.location.replace(
+                "login.html"
+            );
+
+        }
+
+
+        const form =
+            document.getElementById(
+                "profileForm"
+            );
+
+
+        const status =
+            document.getElementById(
+                "status"
+            );
+
+
+        const savedProfile =
+            JSON.parse(
+                localStorage.getItem(
+                    PROFILE_KEY
+                ) || "null"
+            );
+
+
+        /* Restore previous profile */
+
+        if (savedProfile) {
+
+            document.getElementById(
+                "teacherName"
+            ).value =
+                savedProfile.name || "";
+
+
+            document.getElementById(
+                "teacherId"
+            ).value =
+                savedProfile.teacherId || "";
+
+
+            document.getElementById(
+                "role"
+            ).value =
+                savedProfile.role || "";
+
+
+            (
+                savedProfile.subjects || []
+            ).forEach(
+                function(subject) {
+
+                    const checkbox =
+                        document.querySelector(
+                            'input[value="' +
+                            subject +
+                            '"]'
+                        );
+
+
+                    if (checkbox) {
+
+                        checkbox.checked =
+                            true;
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* SAVE PROFILE */
+
+        form.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                const subjects = [
+
+                    ...document.querySelectorAll(
+                        ".subject-option input:checked"
+                    )
+
+                ].map(
+                    function(input) {
+                        return input.value;
+                    }
+                );
+
+
+                if (
+                    subjects.length === 0
+                ) {
+
+                    status.textContent =
+                        "Please select at least one subject.";
+
+                    status.className =
+                        "status error";
+
+                    return;
+
+                }
+
+
+                const profile = {
+
+                    name:
+                        document
+                            .getElementById(
+                                "teacherName"
+                            )
+                            .value
+                            .trim(),
+
+                    teacherId:
+                        document
+                            .getElementById(
+                                "teacherId"
+                            )
+                            .value
+                            .trim(),
+
+                    role:
+                        document
+                            .getElementById(
+                                "role"
+                            )
+                            .value,
+
+                    subjects:
+                        subjects
+
+                };
+
+
+                localStorage.setItem(
+                    PROFILE_KEY,
+                    JSON.stringify(
+                        profile
+                    )
+                );
+
+
+                status.textContent =
+                    "Profile saved. Opening your teacher portal…";
+
+                status.className =
+                    "status success";
+
+
+                setTimeout(
+                    function() {
+
+                        window.location.replace(
+                            "dashboard.html"
+                        );
+
+                    },
+                    600
+                );
+
+            }
+        );
+
+
+        /* SIGN OUT */
+
+        document
+            .getElementById("signOut")
+            .addEventListener(
+                "click",
+                function() {
+
+                    sessionStorage.removeItem(
+                        SESSION_KEY
+                    );
+
+                    sessionStorage.removeItem(
+                        "GCSE_TEACHER_SCHOOL"
+                    );
+
+                    localStorage.removeItem(
+                        PROFILE_KEY
+                    );
+
+                    window.location.replace(
+                        "login.html"
+                    );
+
+                }
+            );
+
+    </script>
+
+
+</body>
+
+</html>
