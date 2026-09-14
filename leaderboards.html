@@ -1406,12 +1406,11 @@
                                 ${agent.rank}
                             </td>
 
-                            <td
-                                class="agent-name"
-                            >
-                              agent.studentName || "Unknown Student"
-                            </td>
-
+                           <td
+    class="agent-name"
+>
+    ${escapeHtml(agent.studentName || "Unknown Student")}
+</td>
                             <td
                                 class="agent-id"
                             >
