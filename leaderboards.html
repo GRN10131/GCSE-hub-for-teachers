@@ -3,750 +3,1612 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<title>Leaderboards | GCSE Hub for Teachers</title>
+    <title>Leaderboards | GCSE Hub</title>
 
-<style>
+    <style>
 
-* {
-  box-sizing: border-box;
-}
+        * {
+            box-sizing: border-box;
+        }
 
-body {
+        body {
+            margin: 0;
 
-  margin: 0;
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Arial,
+                sans-serif;
 
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
+            background: #f4f6f9;
 
-  background: #f5f7fb;
+            color: #18202f;
+        }
 
-  color: #172033;
 
-}
+        /* =========================
+           SIDEBAR
+        ========================= */
 
-.sidebar {
+        .sidebar {
 
-  position: fixed;
+            position: fixed;
 
-  left: 0;
-  top: 0;
+            left: 0;
+            top: 0;
+            bottom: 0;
 
-  width: 240px;
-  height: 100vh;
+            width: 250px;
 
-  background: #172033;
+            background:
+                linear-gradient(
+                    180deg,
+                    #570914 0%,
+                    #720c1b 100%
+                );
 
-  color: white;
+            color: white;
 
-  padding: 25px 15px;
+            padding: 25px 18px;
 
-}
+            display: flex;
 
-.logo {
+            flex-direction: column;
 
-  font-size: 22px;
+            z-index: 1000;
+        }
 
-  font-weight: bold;
 
-  padding: 0 15px 30px;
+        .brand {
 
-}
+            padding:
+                5px 12px 28px;
 
-.nav a {
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.15);
+        }
 
-  display: block;
 
-  color: #dce2ec;
+        .brand-title {
 
-  text-decoration: none;
+            font-size: 21px;
 
-  padding: 13px 15px;
+            font-weight: 700;
 
-  border-radius: 8px;
+            letter-spacing: -0.3px;
+        }
 
-  margin-bottom: 5px;
 
-}
+        .brand-subtitle {
 
-.nav a:hover {
+            margin-top: 5px;
 
-  background: #27344d;
+            font-size: 12px;
 
-}
+            color:
+                rgba(255,255,255,0.68);
 
-.nav a.active {
+            text-transform: uppercase;
 
-  background: #630914;
+            letter-spacing: 1px;
+        }
 
-  color: white;
 
-}
+        .navigation {
 
-.main {
+            margin-top: 25px;
+        }
 
-  margin-left: 240px;
 
-  padding: 40px;
+        .nav-title {
 
-}
+            font-size: 10px;
 
-.header {
+            text-transform: uppercase;
 
-  margin-bottom: 30px;
+            letter-spacing: 1.4px;
 
-}
+            color:
+                rgba(255,255,255,0.5);
 
-.header h1 {
+            padding:
+                0 12px 10px;
+        }
 
-  margin: 0 0 8px;
 
-  font-size: 32px;
+        .nav-item {
 
-}
+            width: 100%;
 
-.header p {
+            border: none;
 
-  margin: 0;
+            background: transparent;
 
-  color: #697386;
+            color:
+                rgba(255,255,255,0.8);
 
-}
+            text-align: left;
 
-.tabs {
+            padding: 12px;
 
-  display: flex;
+            border-radius: 8px;
 
-  gap: 10px;
+            margin-bottom: 5px;
 
-  margin-bottom: 25px;
+            font-size: 14px;
 
-}
+            cursor: pointer;
 
-.tab {
+            transition:
+                background 0.2s,
+                color 0.2s;
 
-  border: none;
+            text-decoration: none;
 
-  background: white;
+            display: block;
+        }
 
-  padding: 12px 20px;
 
-  border-radius: 8px;
+        .nav-item:hover {
 
-  cursor: pointer;
+            background:
+                rgba(255,255,255,0.09);
 
-  font-size: 15px;
+            color: white;
+        }
 
-  font-weight: bold;
 
-  color: #4d5668;
+        .nav-item.active {
 
-}
+            background:
+                rgba(255,255,255,0.14);
 
-.tab.active {
+            color: white;
 
-  background: #630914;
+            font-weight: 600;
+        }
 
-  color: white;
 
-}
+        .nav-icon {
 
-.card {
+            display: inline-block;
 
-  background: white;
+            width: 25px;
 
-  border-radius: 12px;
+            opacity: 0.9;
+        }
 
-  box-shadow:
-    0 2px 10px rgba(0,0,0,0.06);
 
-  overflow: hidden;
+        .sidebar-bottom {
 
-}
+            margin-top: auto;
+        }
 
-.card-header {
 
-  padding: 22px 25px;
+        .teacher-mini {
 
-  border-bottom:
-    1px solid #e8ebf0;
+            padding: 13px;
 
-}
+            border-radius: 9px;
 
-.card-header h2 {
+            background:
+                rgba(255,255,255,0.08);
 
-  margin: 0 0 5px;
+            margin-bottom: 10px;
+        }
 
-}
 
-.card-header p {
+        .teacher-mini-name {
 
-  margin: 0;
+            font-size: 13px;
 
-  color: #697386;
+            font-weight: 600;
+        }
 
-}
 
-.table-wrapper {
+        .teacher-mini-id {
 
-  overflow-x: auto;
+            margin-top: 3px;
 
-}
+            font-size: 11px;
 
-table {
+            color:
+                rgba(255,255,255,0.6);
+        }
 
-  width: 100%;
 
-  border-collapse: collapse;
+        .logout-button {
 
-}
+            width: 100%;
 
-th,
-td {
+            border: none;
 
-  padding: 16px 20px;
+            background:
+                rgba(0,0,0,0.15);
 
-  text-align: left;
+            color:
+                rgba(255,255,255,0.8);
 
-  border-bottom:
-    1px solid #edf0f4;
+            padding: 11px;
 
-}
+            border-radius: 8px;
 
-th {
+            cursor: pointer;
 
-  font-size: 13px;
+            font-size: 13px;
+        }
 
-  text-transform: uppercase;
 
-  letter-spacing: 0.04em;
+        .logout-button:hover {
 
-  color: #697386;
+            background:
+                rgba(0,0,0,0.28);
 
-  background: #fafbfc;
+            color: white;
+        }
 
-}
 
-td {
+        /* =========================
+           MAIN
+        ========================= */
 
-  font-size: 15px;
+        .main {
 
-}
+            margin-left: 250px;
 
-.rank {
+            min-height: 100vh;
 
-  font-weight: bold;
+            padding: 30px 35px;
+        }
 
-  width: 80px;
 
-}
+        .topbar {
 
-.rank-1 {
+            display: flex;
 
-  font-size: 19px;
+            justify-content:
+                space-between;
 
-}
+            align-items: center;
 
-.rank-2 {
+            margin-bottom: 30px;
+        }
 
-  font-size: 18px;
 
-}
+        .page-heading h1 {
 
-.rank-3 {
+            margin: 0;
 
-  font-size: 17px;
+            font-size: 27px;
 
-}
+            letter-spacing: -0.6px;
+        }
 
-.agent-id {
 
-  font-family: monospace;
+        .page-heading p {
 
-  font-size: 13px;
+            margin: 6px 0 0;
 
-  color: #5e6675;
+            color: #6d7584;
 
-}
+            font-size: 14px;
+        }
 
-.loading {
 
-  padding: 40px;
+        .school-badge {
 
-  text-align: center;
+            display: flex;
 
-  color: #697386;
+            align-items: center;
 
-}
+            gap: 10px;
 
-.error {
+            background: white;
 
-  padding: 25px;
+            border:
+                1px solid #e1e5eb;
 
-  color: #a61b1b;
+            padding: 9px 13px;
 
-  background: #fff4f4;
+            border-radius: 9px;
 
-  border: 1px solid #f0caca;
+            font-size: 12px;
 
-  margin: 20px;
+            color: #596171;
+        }
 
-  border-radius: 8px;
 
-}
+        .school-dot {
 
-@media (max-width: 750px) {
+            width: 8px;
+            height: 8px;
 
-  .sidebar {
+            border-radius: 50%;
 
-    position: relative;
+            background: #630914;
+        }
 
-    width: 100%;
 
-    height: auto;
+        /* =========================
+           PAGE INTRO
+        ========================= */
 
-  }
+        .intro-card {
 
-  .nav {
+            background:
+                linear-gradient(
+                    120deg,
+                    #630914,
+                    #861022
+                );
 
-    display: flex;
+            color: white;
 
-    overflow-x: auto;
+            border-radius: 13px;
 
-  }
+            padding: 25px 30px;
 
-  .nav a {
+            margin-bottom: 25px;
 
-    white-space: nowrap;
+            box-shadow:
+                0 8px 25px
+                rgba(70, 7, 17, 0.13);
+        }
 
-  }
 
-  .main {
+        .intro-card h2 {
 
-    margin-left: 0;
+            margin: 0;
 
-    padding: 20px;
+            font-size: 20px;
+        }
 
-  }
 
-}
+        .intro-card p {
 
-</style>
+            margin: 7px 0 0;
+
+            color:
+                rgba(255,255,255,0.75);
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           LEADERBOARD TABS
+        ========================= */
+
+        .leaderboard-tabs {
+
+            display: flex;
+
+            gap: 8px;
+
+            margin-bottom: 22px;
+        }
+
+
+        .tab-button {
+
+            border:
+                1px solid #e1e5eb;
+
+            background: white;
+
+            color: #596171;
+
+            padding: 11px 17px;
+
+            border-radius: 8px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                background 0.18s,
+                border 0.18s,
+                color 0.18s;
+        }
+
+
+        .tab-button:hover {
+
+            border-color: #c6cbd3;
+
+            background: #fafbfc;
+        }
+
+
+        .tab-button.active {
+
+            background: #630914;
+
+            border-color: #630914;
+
+            color: white;
+        }
+
+
+        /* =========================
+           PANELS
+        ========================= */
+
+        .panel {
+
+            background: white;
+
+            border:
+                1px solid #e1e5eb;
+
+            border-radius: 11px;
+
+            overflow: hidden;
+
+            margin-bottom: 22px;
+        }
+
+
+        .panel-header {
+
+            padding: 18px 20px;
+
+            border-bottom:
+                1px solid #edf0f3;
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+        }
+
+
+        .panel-title {
+
+            margin: 0;
+
+            font-size: 15px;
+
+            font-weight: 650;
+        }
+
+
+        .panel-subtitle {
+
+            margin: 4px 0 0;
+
+            font-size: 11px;
+
+            color: #89919e;
+        }
+
+
+        /* =========================
+           FILTER BAR
+        ========================= */
+
+        .filters {
+
+            padding: 15px 20px;
+
+            background: #fafbfc;
+
+            border-bottom:
+                1px solid #edf0f3;
+
+            display: flex;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .filter-select {
+
+            border:
+                1px solid #dfe3e8;
+
+            background: white;
+
+            color: #454d5b;
+
+            padding: 9px 11px;
+
+            border-radius: 7px;
+
+            font-size: 12px;
+
+            outline: none;
+        }
+
+
+        .filter-select:focus {
+
+            border-color: #630914;
+        }
+
+
+        /* =========================
+           LEADERBOARD
+        ========================= */
+
+        .leaderboard-container {
+
+            overflow-x: auto;
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+        }
+
+
+        th {
+
+            padding:
+                13px 18px;
+
+            text-align: left;
+
+            background: #fafbfc;
+
+            border-bottom:
+                1px solid #e8ebef;
+
+            color: #7a8290;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.8px;
+
+            white-space: nowrap;
+        }
+
+
+        td {
+
+            padding:
+                15px 18px;
+
+            border-bottom:
+                1px solid #eef0f3;
+
+            font-size: 12px;
+
+            color: #333b4a;
+
+            white-space: nowrap;
+        }
+
+
+        tbody tr:last-child td {
+
+            border-bottom: none;
+        }
+
+
+        tbody tr:hover {
+
+            background: #fafbfc;
+        }
+
+
+        .rank {
+
+            width: 65px;
+
+            font-weight: 700;
+
+            color: #596171;
+        }
+
+
+        .rank-top {
+
+            color: #630914;
+
+            font-size: 14px;
+        }
+
+
+        .agent-name {
+
+            font-weight: 650;
+
+            color: #202838;
+        }
+
+
+        .agent-id {
+
+            font-family:
+                "SFMono-Regular",
+                Consolas,
+                monospace;
+
+            font-size: 11px;
+
+            color: #858d99;
+        }
+
+
+        .number {
+
+            font-weight: 600;
+
+            color: #333b4a;
+        }
+
+
+        /* =========================
+           EMPTY / LOADING
+        ========================= */
+
+        .loading {
+
+            padding: 45px 20px;
+
+            text-align: center;
+
+            color: #89919e;
+
+            font-size: 12px;
+        }
+
+
+        .error {
+
+            margin: 18px;
+
+            padding: 14px 16px;
+
+            background: #fff5f5;
+
+            border:
+                1px solid #edd0d0;
+
+            border-radius: 8px;
+
+            color: #9b2525;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 750px) {
+
+            .sidebar {
+
+                position: static;
+
+                width: 100%;
+
+                min-height: auto;
+
+                padding: 15px;
+            }
+
+
+            .navigation {
+
+                display: flex;
+
+                overflow-x: auto;
+
+                margin-top: 15px;
+            }
+
+
+            .nav-title {
+
+                display: none;
+            }
+
+
+            .nav-item {
+
+                white-space: nowrap;
+
+                width: auto;
+
+                margin-right: 5px;
+            }
+
+
+            .sidebar-bottom {
+
+                display: none;
+            }
+
+
+            .main {
+
+                margin-left: 0;
+
+                padding: 22px 16px;
+            }
+
+
+            .topbar {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 12px;
+            }
+
+
+            .intro-card {
+
+                padding: 22px;
+            }
+
+
+            .leaderboard-tabs {
+
+                overflow-x: auto;
+            }
+
+
+            .tab-button {
+
+                white-space: nowrap;
+            }
+
+        }
+
+    </style>
 
 </head>
 
+
 <body>
 
-<aside class="sidebar">
 
-  <div class="logo">
-    GCSE Hub
-  </div>
+    <!-- =========================
+         SIDEBAR
+    ========================= -->
 
-  <nav class="nav">
+    <aside class="sidebar">
 
-    <a href="dashboard.html">
-      Dashboard
-    </a>
+        <div class="brand">
 
-    <a href="leaderboards.html"
-       class="active">
-      Leaderboards
-    </a>
+            <div class="brand-title">
+                GCSE Hub
+            </div>
 
-    <a href="teacher-help.html">
-      Teacher Help
-    </a>
+            <div class="brand-subtitle">
+                Teacher Portal
+            </div>
 
-    <a href="profile.html">
-      My Profile
-    </a>
+        </div>
 
-  </nav>
 
-</aside>
+        <nav class="navigation">
 
+            <div class="nav-title">
+                Portal
+            </div>
 
-<main class="main">
 
-  <div class="header">
+            <a
+                class="nav-item"
+                href="dashboard.html"
+            >
 
-    <h1>Leaderboards</h1>
+                <span class="nav-icon">
+                    ▦
+                </span>
 
-    <p>
-      Monitor student and Mission Possible performance.
-    </p>
+                Dashboard
 
-  </div>
+            </a>
 
 
-  <div class="tabs">
+            <a
+                class="nav-item active"
+                href="leaderboards.html"
+            >
 
-    <button
-      class="tab active"
-      id="agentTab"
-      onclick="showLeaderboard('agents')"
-    >
-      Agent Leaderboard
-    </button>
+                <span class="nav-icon">
+                    ♛
+                </span>
 
-    <button
-      class="tab"
-      id="overallTab"
-      onclick="showLeaderboard('overall')"
-    >
-      Overall XP
-    </button>
+                Leaderboards
 
-  </div>
+            </a>
 
 
-  <section
-    class="card"
-    id="agentLeaderboard"
-  >
+            <a
+                class="nav-item"
+                href="teacher-help.html"
+            >
 
-    <div class="card-header">
+                <span class="nav-icon">
+                    ?
+                </span>
 
-      <h2>Agent Leaderboard</h2>
+                Teacher Help
 
-      <p>
-        Mission Possible performance across the school.
-      </p>
+            </a>
 
-    </div>
 
-    <div
-      id="agentContent"
-      class="loading"
-    >
-      Loading leaderboard...
-    </div>
+            <a
+                class="nav-item"
+                href="profile.html"
+            >
 
-  </section>
+                <span class="nav-icon">
+                    ○
+                </span>
 
+                My Profile
 
-  <section
-    class="card"
-    id="overallLeaderboard"
-    style="display:none;"
-  >
+            </a>
 
-    <div class="card-header">
+        </nav>
 
-      <h2>Overall XP Leaderboard</h2>
 
-      <p>
-        Overall GCSE Hub progression.
-      </p>
+        <div class="sidebar-bottom">
 
-    </div>
+            <div class="teacher-mini">
 
-    <div
-      class="loading"
-    >
-      Overall XP leaderboard will be connected next.
-    </div>
+                <div
+                    class="teacher-mini-name"
+                    id="sidebarTeacherName"
+                >
+                    Teacher
+                </div>
 
-  </section>
+                <div
+                    class="teacher-mini-id"
+                    id="sidebarTeacherId"
+                >
+                    TCH-000
+                </div>
 
-</main>
+            </div>
 
 
-<script>
+            <button
+                class="logout-button"
+                onclick="logout()"
+            >
+                Sign out
+            </button>
 
-const API_URL =
-  "https://script.google.com/macros/s/AKfycbwAlZiQbF-nEkYkZCTWwsp1lltQDG9OacGdnGzGtixBga0f0cyue0LYyDqePqZzNiYF/exec";
+        </div>
 
-const SESSION_KEY =
-  "GCSE_TEACHER_SESSION";
+    </aside>
 
 
-function getSession() {
+    <!-- =========================
+         MAIN
+    ========================= -->
 
-  const token =
-    sessionStorage.getItem(
-      SESSION_KEY
-    );
+    <main class="main">
 
-  if (!token) {
 
-    window.location.replace(
-      "login.html"
-    );
+        <div class="topbar">
 
-    return null;
+            <div class="page-heading">
 
-  }
+                <h1>
+                    Leaderboards
+                </h1>
 
-  return token;
+                <p>
+                    Monitor student progress and Mission Possible performance.
+                </p>
 
-}
+            </div>
 
 
-async function loadAgentLeaderboard() {
+            <div class="school-badge">
 
-  const token =
-    getSession();
+                <span class="school-dot"></span>
 
-  if (!token) {
-    return;
-  }
+                <span id="schoolName">
+                    Paulet High School
+                </span>
 
-  const container =
-    document.getElementById(
-      "agentContent"
-    );
+            </div>
 
-  container.innerHTML =
-    '<div class="loading">Loading leaderboard...</div>';
+        </div>
 
-  try {
 
-    const url =
-      API_URL +
-      "?action=teacherAgentLeaderboard" +
-      "&token=" +
-      encodeURIComponent(token);
+        <!-- =========================
+             INTRO
+        ========================= -->
 
-    const response =
-      await fetch(url);
+        <section class="intro-card">
 
-    const result =
-      await response.json();
+            <h2>
+                Student Performance
+            </h2>
 
-    if (!result.success) {
+            <p>
+                Use the leaderboards to monitor Mission Possible
+                achievements and overall GCSE Hub progression.
+            </p>
 
-      throw new Error(
-        result.error ||
-        "Unable to load leaderboard."
-      );
+        </section>
 
-    }
 
-    renderAgentLeaderboard(
-      result.leaderboard || []
-    );
+        <!-- =========================
+             TABS
+        ========================= -->
 
-  } catch (error) {
+        <div class="leaderboard-tabs">
 
-    container.innerHTML =
-      '<div class="error">' +
-      error.message +
-      '</div>';
+            <button
+                class="tab-button active"
+                id="agentTab"
+                onclick="showLeaderboard('agents')"
+            >
+                ♛ Agent Leaderboard
+            </button>
 
-  }
 
-}
+            <button
+                class="tab-button"
+                id="overallTab"
+                onclick="showLeaderboard('overall')"
+            >
+                ★ Overall XP
+            </button>
 
+        </div>
 
-function renderAgentLeaderboard(
-  leaderboard
-) {
 
-  const container =
-    document.getElementById(
-      "agentContent"
-    );
+        <!-- =========================
+             AGENT LEADERBOARD
+        ========================= -->
 
-  if (!leaderboard.length) {
+        <section
+            class="panel"
+            id="agentLeaderboard"
+        >
 
-    container.innerHTML =
-      '<div class="loading">' +
-      'No Agent data is currently available.' +
-      '</div>';
+            <div class="panel-header">
 
-    return;
+                <div>
 
-  }
+                    <h2 class="panel-title">
+                        Agent Leaderboard
+                    </h2>
 
-  let html = `
+                    <p class="panel-subtitle">
+                        Mission Possible performance across Paulet High School
+                    </p>
 
-    <div class="table-wrapper">
+                </div>
 
-      <table>
+            </div>
 
-        <thead>
 
-          <tr>
+            <div class="filters">
 
-            <th>Rank</th>
+                <select
+                    class="filter-select"
+                    id="agentPeriod"
+                >
 
-            <th>Agent</th>
+                    <option value="all">
+                        All Time
+                    </option>
 
-            <th>Agent ID</th>
+                    <option value="term">
+                        This Term
+                    </option>
 
-            <th>Missions Completed</th>
+                    <option value="month">
+                        This Month
+                    </option>
 
-            <th>Gems</th>
+                </select>
 
-          </tr>
 
-        </thead>
+                <select
+                    class="filter-select"
+                    id="agentSubject"
+                >
 
-        <tbody>
+                    <option value="all">
+                        All Subjects
+                    </option>
 
-  `;
+                </select>
 
-  leaderboard.forEach(
-    function(agent) {
+            </div>
 
-      let rankClass = "";
 
-      if (agent.rank === 1) {
-        rankClass = "rank-1";
-      }
+            <div
+                class="leaderboard-container"
+                id="agentContent"
+            >
 
-      if (agent.rank === 2) {
-        rankClass = "rank-2";
-      }
+                <div class="loading">
+                    Loading leaderboard...
+                </div>
 
-      if (agent.rank === 3) {
-        rankClass = "rank-3";
-      }
+            </div>
 
-      html += `
+        </section>
 
-        <tr>
 
-          <td class="rank ${rankClass}">
-            ${agent.rank}
-          </td>
+        <!-- =========================
+             OVERALL LEADERBOARD
+        ========================= -->
 
-          <td>
-            Agent ${agent.rank}
-          </td>
+        <section
+            class="panel"
+            id="overallLeaderboard"
+            style="display:none;"
+        >
 
-          <td class="agent-id">
-            ${escapeHtml(agent.agentId)}
-          </td>
+            <div class="panel-header">
 
-          <td>
-            ${agent.missions}
-          </td>
+                <div>
 
-          <td>
-            ${agent.gems}
-          </td>
+                    <h2 class="panel-title">
+                        Overall XP Leaderboard
+                    </h2>
 
-        </tr>
+                    <p class="panel-subtitle">
+                        Overall GCSE Hub student progression
+                    </p>
 
-      `;
+                </div>
 
-    }
-  );
+            </div>
 
-  html += `
 
-        </tbody>
+            <div class="filters">
 
-      </table>
+                <select
+                    class="filter-select"
+                    id="overallPeriod"
+                >
 
-    </div>
+                    <option value="all">
+                        All Time
+                    </option>
 
-  `;
+                    <option value="term">
+                        This Term
+                    </option>
 
-  container.innerHTML =
-    html;
+                    <option value="month">
+                        This Month
+                    </option>
 
-}
+                </select>
 
 
-function escapeHtml(
-  value
-) {
+                <select
+                    class="filter-select"
+                    id="overallSubject"
+                >
 
-  return String(value)
+                    <option value="all">
+                        All Subjects
+                    </option>
 
-    .replaceAll("&", "&amp;")
+                </select>
 
-    .replaceAll("<", "&lt;")
+            </div>
 
-    .replaceAll(">", "&gt;")
 
-    .replaceAll('"', "&quot;")
+            <div class="loading">
 
-    .replaceAll("'", "&#039;");
+                Overall XP leaderboard will be connected
+                once the student progress data is linked.
 
-}
+            </div>
 
+        </section>
 
-function showLeaderboard(
-  type
-) {
 
-  const agents =
-    document.getElementById(
-      "agentLeaderboard"
-    );
+    </main>
 
-  const overall =
-    document.getElementById(
-      "overallLeaderboard"
-    );
 
-  const agentTab =
-    document.getElementById(
-      "agentTab"
-    );
+    <script>
 
-  const overallTab =
-    document.getElementById(
-      "overallTab"
-    );
 
+        /* =========================
+           SETTINGS
+        ========================= */
 
-  if (type === "agents") {
+        const API_URL =
+            "https://script.google.com/macros/s/AKfycbwAlZiQbF-nEkYkZCTWwsp1lltQDG9OacGdnGzGtixBga0f0cyue0LYyDqePqZzNiYF/exec";
 
-    agents.style.display =
-      "block";
 
-    overall.style.display =
-      "none";
+        const SESSION_KEY =
+            "GCSE_TEACHER_SESSION";
 
-    agentTab.classList.add(
-      "active"
-    );
 
-    overallTab.classList.remove(
-      "active"
-    );
+        const PROFILE_KEY =
+            "GCSE_TEACHER_PROFILE";
 
-  }
 
+        const SCHOOL_KEY =
+            "GCSE_TEACHER_SCHOOL";
 
-  if (type === "overall") {
 
-    agents.style.display =
-      "none";
+        /* =========================
+           LOAD TEACHER
+        ========================= */
 
-    overall.style.display =
-      "block";
+        function loadTeacherProfile() {
 
-    agentTab.classList.remove(
-      "active"
-    );
+            const profileData =
+                localStorage.getItem(
+                    PROFILE_KEY
+                );
 
-    overallTab.classList.add(
-      "active"
-    );
 
-  }
+            const session =
+                sessionStorage.getItem(
+                    SESSION_KEY
+                );
 
-}
 
+            if (!profileData || !session) {
 
-loadAgentLeaderboard();
+                window.location.replace(
+                    "login.html"
+                );
 
-</script>
+                return;
+
+            }
+
+
+            let profile;
+
+            try {
+
+                profile =
+                    JSON.parse(profileData);
+
+            } catch (error) {
+
+                window.location.replace(
+                    "login.html"
+                );
+
+                return;
+
+            }
+
+
+            const name =
+                profile.name ||
+                "Teacher";
+
+
+            const teacherId =
+                profile.teacherId ||
+                "TCH-000";
+
+
+            const school =
+                profile.school ||
+                sessionStorage.getItem(
+                    SCHOOL_KEY
+                ) ||
+                "Paulet High School";
+
+
+            document.getElementById(
+                "sidebarTeacherName"
+            ).textContent =
+                name;
+
+
+            document.getElementById(
+                "sidebarTeacherId"
+            ).textContent =
+                teacherId;
+
+
+            document.getElementById(
+                "schoolName"
+            ).textContent =
+                school;
+
+        }
+
+
+        /* =========================
+           LOAD AGENT LEADERBOARD
+        ========================= */
+
+        async function loadAgentLeaderboard() {
+
+            const token =
+                sessionStorage.getItem(
+                    SESSION_KEY
+                );
+
+
+            if (!token) {
+
+                window.location.replace(
+                    "login.html"
+                );
+
+                return;
+
+            }
+
+
+            const container =
+                document.getElementById(
+                    "agentContent"
+                );
+
+
+            container.innerHTML =
+                '<div class="loading">Loading leaderboard...</div>';
+
+
+            try {
+
+                const url =
+                    API_URL +
+                    "?action=teacherAgentLeaderboard" +
+                    "&token=" +
+                    encodeURIComponent(token);
+
+
+                const response =
+                    await fetch(url);
+
+
+                const result =
+                    await response.json();
+
+
+                if (!result.success) {
+
+                    throw new Error(
+                        result.error ||
+                        "Unable to load leaderboard."
+                    );
+
+                }
+
+
+                renderAgentLeaderboard(
+                    result.leaderboard || []
+                );
+
+
+            } catch (error) {
+
+                container.innerHTML =
+                    '<div class="error">' +
+                    escapeHtml(error.message) +
+                    '</div>';
+
+            }
+
+        }
+
+
+        /* =========================
+           RENDER AGENT LEADERBOARD
+        ========================= */
+
+        function renderAgentLeaderboard(
+            leaderboard
+        ) {
+
+            const container =
+                document.getElementById(
+                    "agentContent"
+                );
+
+
+            if (!leaderboard.length) {
+
+                container.innerHTML =
+                    '<div class="loading">' +
+                    'No Agent data is currently available.' +
+                    '</div>';
+
+                return;
+
+            }
+
+
+            let html = `
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Rank
+                            </th>
+
+                            <th>
+                                Agent
+                            </th>
+
+                            <th>
+                                Agent ID
+                            </th>
+
+                            <th>
+                                Missions Completed
+                            </th>
+
+                            <th>
+                                Gems
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+            `;
+
+
+            leaderboard.forEach(
+                function(agent) {
+
+                    const rankClass =
+                        agent.rank <= 3
+                            ? "rank-top"
+                            : "";
+
+
+                    html += `
+
+                        <tr>
+
+                            <td
+                                class="rank ${rankClass}"
+                            >
+                                ${agent.rank}
+                            </td>
+
+                            <td
+                                class="agent-name"
+                            >
+                                Agent ${agent.rank}
+                            </td>
+
+                            <td
+                                class="agent-id"
+                            >
+                                ${escapeHtml(agent.agentId)}
+                            </td>
+
+                            <td
+                                class="number"
+                            >
+                                ${agent.missions}
+                            </td>
+
+                            <td
+                                class="number"
+                            >
+                                ${agent.gems}
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                }
+            );
+
+
+            html += `
+
+                    </tbody>
+
+                </table>
+
+            `;
+
+
+            container.innerHTML =
+                html;
+
+        }
+
+
+        /* =========================
+           TABS
+        ========================= */
+
+        function showLeaderboard(
+            type
+        ) {
+
+            const agents =
+                document.getElementById(
+                    "agentLeaderboard"
+                );
+
+
+            const overall =
+                document.getElementById(
+                    "overallLeaderboard"
+                );
+
+
+            const agentTab =
+                document.getElementById(
+                    "agentTab"
+                );
+
+
+            const overallTab =
+                document.getElementById(
+                    "overallTab"
+                );
+
+
+            if (type === "agents") {
+
+                agents.style.display =
+                    "block";
+
+                overall.style.display =
+                    "none";
+
+
+                agentTab.classList.add(
+                    "active"
+                );
+
+                overallTab.classList.remove(
+                    "active"
+                );
+
+            }
+
+
+            if (type === "overall") {
+
+                agents.style.display =
+                    "none";
+
+                overall.style.display =
+                    "block";
+
+
+                agentTab.classList.remove(
+                    "active"
+                );
+
+                overallTab.classList.add(
+                    "active"
+                );
+
+            }
+
+        }
+
+
+        /* =========================
+           HTML SAFETY
+        ========================= */
+
+        function escapeHtml(
+            value
+        ) {
+
+            return String(value)
+
+                .replaceAll(
+                    "&",
+                    "&amp;"
+                )
+
+                .replaceAll(
+                    "<",
+                    "&lt;"
+                )
+
+                .replaceAll(
+                    ">",
+                    "&gt;"
+                )
+
+                .replaceAll(
+                    '"',
+                    "&quot;"
+                )
+
+                .replaceAll(
+                    "'",
+                    "&#039;"
+                );
+
+        }
+
+
+        /* =========================
+           LOGOUT
+        ========================= */
+
+        function logout() {
+
+            const confirmed =
+                confirm(
+                    "Are you sure you want to sign out?"
+                );
+
+
+            if (!confirmed) {
+                return;
+            }
+
+
+            sessionStorage.removeItem(
+                SESSION_KEY
+            );
+
+
+            sessionStorage.removeItem(
+                SCHOOL_KEY
+            );
+
+
+            window.location.replace(
+                "login.html"
+            );
+
+        }
+
+
+        /* =========================
+           START
+        ========================= */
+
+        loadTeacherProfile();
+
+        loadAgentLeaderboard();
+
+    </script>
 
 </body>
 
